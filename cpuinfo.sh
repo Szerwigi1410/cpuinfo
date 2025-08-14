@@ -41,12 +41,22 @@ else
     OS_VERSION="$(uname -r)"
 fi
 
+# CPU information
 CPU_NAME="$(lscpu | grep 'Model name' | awk -F: '{print $2}' | xargs)"
+
 BRAND="$(lscpu | grep -Eio 'intel|amd|powerpc' | head -1)"
 if [ -z "$BRAND" ]; then
     BRAND="Unknown"
 fi
 
+# Number of cores
+CORE_NUM="$(lscpu | grep 'Core(s) per socket' | awk -F: '{print $2}' | xargs)"
+
+# Threads
+
+THREAD_PER="$(lscpu | grep 'Thread(s) per core' | awk -F: '{print $2}' | xargs)"
+
+#cache
 L1="$(lscpu | grep 'L1' |awk -F: '{print $2}'| xargs |head -1)"
 L2="$(lscpu | grep 'L2' |awk -F: '{print $2}'| xargs)"
 L3="$(lscpu | grep 'L3' |awk -F: '{print $2}'| xargs)"
@@ -58,7 +68,9 @@ echo -e "${RESET}${BOLD}${RESET}"
 echo -e "${RESET}${BOLD}Architecture:${RESET} ${COLOR}$(uname -m)${RESET}"
 echo -e "${RESET}${BOLD}Brand:${RESET} ${COLOR}${BRAND}${RESET}"
 echo -e "${RESET}${BOLD}Model:${RESET} ${COLOR}${CPU_NAME}${RESET}"
-echo -e "${RESET}${BOLD}Cores:${RESET} ${COLOR}$(nproc)${RESET}"
+echo -e "${RESET}${BOLD}Cores:${RESET} ${COLOR}${CORE_NUM}${RESET}"
+echo -e "${RESET}${BOLD}Threads:${RESET} ${COLOR}$(nproc)${RESET}"
+echo -e "${RESET}${BOLD}Threads per core:${RESET} ${COLOR}${THREAD_PER}${RESET}"
 echo -e "${RESET}${BOLD}L1:${RESET} ${COLOR}${L1}${RESET}"
 echo -e "${RESET}${BOLD}L2:${RESET} ${COLOR}${L2}${RESET}"
 echo -e "${RESET}${BOLD}L3:${RESET} ${COLOR}${L3}${RESET}"
