@@ -54,6 +54,8 @@ CORE_NUM="$(lscpu | grep 'Core(s) per socket' | awk -F: '{print $2}' | xargs)"
 
 # Threads
 
+THREADS="$(nproc)"
+
 THREAD_PER="$(lscpu | grep 'Thread(s) per core' | awk -F: '{print $2}' | xargs)"
 
 #cache
@@ -69,7 +71,7 @@ echo -e "${RESET}${BOLD}Architecture:${RESET} ${COLOR}$(uname -m)${RESET}"
 echo -e "${RESET}${BOLD}Brand:${RESET} ${COLOR}${BRAND}${RESET}"
 echo -e "${RESET}${BOLD}Model:${RESET} ${COLOR}${CPU_NAME}${RESET}"
 echo -e "${RESET}${BOLD}Cores:${RESET} ${COLOR}${CORE_NUM}${RESET}"
-echo -e "${RESET}${BOLD}Threads:${RESET} ${COLOR}$(nproc)${RESET}"
+echo -e "${RESET}${BOLD}Threads:${RESET} ${COLOR}${THREADS}${RESET}"
 echo -e "${RESET}${BOLD}Threads per core:${RESET} ${COLOR}${THREAD_PER}${RESET}"
 echo -e "${RESET}${BOLD}L1:${RESET} ${COLOR}${L1}${RESET}"
 echo -e "${RESET}${BOLD}L2:${RESET} ${COLOR}${L2}${RESET}"
