@@ -127,7 +127,7 @@ case "$BRAND_TO_DISPLAY" in
         
         ;;
     *)
-        
+
         ;;
 esac
 
