@@ -63,6 +63,15 @@ THREAD_PER="$(lscpu | grep 'Thread(s) per core' | awk -F: '{print $2}' | xargs)"
 # MHz
 MIN_MHZ="$(lscpu | grep 'CPU min MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
 MAX_MHZ="$(lscpu | grep 'CPU max MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
+CUR_MHZ="$(lscpu | grep 'CPU MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
+
+# Fallback if min/max are empty
+if [[ -z "$MIN_MHZ" ]]; then
+    MIN_MHZ="$CUR_MHZ"
+fi
+if [[ -z "$MAX_MHZ" ]]; then
+    MAX_MHZ="$CUR_MHZ"
+fi
 
 #cache
 L1="$(lscpu | grep 'L1' |awk -F: '{print $2}'| xargs |head -1)"
