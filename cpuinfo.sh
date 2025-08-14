@@ -137,10 +137,10 @@ case "$BRAND_TO_DISPLAY" in
         
         ;;
     *)
-        ascii00="${WHITE}Damn bro"
-        ascii01="${WHITE}Are you THAT broke to not have a normal CPU?"
-        ascii02="${WHITE}You should check out Brokefetch!"
-        ascii03="${WHITE}"
+        ascii00="${WHITE}${BOLD}                                      Damn bro"
+        ascii01="${WHITE}${BOLD}                                                     Are you THAT broke to not have a normal CPU?"
+        ascii02="${WHITE}${BOLD}                                 You should check out Brokefetch!"
+        ascii03="${WHITE}${BOLD}                                         On AUR it's known as brokefetch-git"
         ascii04="${WHITE}"
         ascii05="${WHITE}"
         ascii06="${WHITE}"
