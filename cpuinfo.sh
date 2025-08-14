@@ -108,7 +108,7 @@ case "$BRAND_TO_DISPLAY" in
     "intel")
         ascii00="${CYAN}                                    88                              88  "
         ascii01="${CYAN}                                                   --              ,d              88  "
-        ascii02="${CYAN}                               88              88  "
+        ascii02="${CYAN}                               88              88              88"
         ascii03="${CYAN}                                       88 8b,dPPYba, MM88MMM ,adPPYba, 88  "
         ascii04="${CYAN}    88 88P'   \`\"8a  88   a8P_____88 88  "
         ascii05="${CYAN}                                           88 88       88  88   8PP\"\"\"\"\"\"\" 88  "
