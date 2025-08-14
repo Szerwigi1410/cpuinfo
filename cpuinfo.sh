@@ -58,6 +58,10 @@ THREADS="$(nproc)"
 
 THREAD_PER="$(lscpu | grep 'Thread(s) per core' | awk -F: '{print $2}' | xargs)"
 
+# MHz
+MIN_MHZ="$(lscpu | grep 'CPU min MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
+MAX_MHZ="$(lscpu | grep 'CPU max MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
+
 #cache
 L1="$(lscpu | grep 'L1' |awk -F: '{print $2}'| xargs |head -1)"
 L2="$(lscpu | grep 'L2' |awk -F: '{print $2}'| xargs)"
@@ -73,6 +77,8 @@ echo -e "${RESET}${BOLD}Model:${RESET} ${COLOR}${CPU_NAME}${RESET}"
 echo -e "${RESET}${BOLD}Cores:${RESET} ${COLOR}${CORE_NUM}${RESET}"
 echo -e "${RESET}${BOLD}Threads:${RESET} ${COLOR}${THREADS}${RESET}"
 echo -e "${RESET}${BOLD}Threads per core:${RESET} ${COLOR}${THREAD_PER}${RESET}"
+echo -e "${RESET}${BOLD}Min MHz: ${COLOR}${MIN_MHZ} Mhz${RESET}"
+echo -e "${RESET}${BOLD}Max MHz: ${COLOR}${MAX_MHZ} Mhz${RESET}"
 echo -e "${RESET}${BOLD}L1:${RESET} ${COLOR}${L1}${RESET}"
 echo -e "${RESET}${BOLD}L2:${RESET} ${COLOR}${L2}${RESET}"
 echo -e "${RESET}${BOLD}L3:${RESET} ${COLOR}${L3}${RESET}"
