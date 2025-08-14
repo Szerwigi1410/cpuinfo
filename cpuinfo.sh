@@ -42,11 +42,13 @@ else
 fi
 
 CPU_NAME="$(lscpu | grep 'Model name' | awk -F: '{print $2}' | xargs)"
+BRAND="$(lscpu | grep -Eio 'intel|amd|powerpc' | head -1)"
 
 ## Dispplayer!
 
-echo -e "OS: ${COLOR}${OS_NAME} ${OS_VERSION}${RESET}"
-echo -e "------------------------------"
-echo -e "Architecture: ${COLOR}$(uname -m)${RESET}"
-echo -e "CPU model: ${COLOR}${CPU_NAME}${RESET}"
-echo -e "Cores: ${COLOR}$(nproc)${RESET}"
+echo -e "${RESET}${BOLD}OS:${RESER} ${COLOR}${OS_NAME} ${OS_VERSION}${RESET}"
+echo -e "${RESET}${BOLD}${RESET}"
+echo -e "${RESET}${BOLD}Architecture:${RESET} ${COLOR}$(uname -m)${RESET}"
+echo -e "${RESET}${BOLD}Brand:${RESET} ${COLOR}${BRAND}${RESET}"
+echo -e "${RESET}${BOLD}Model:${RESET} ${COLOR}${CPU_NAME}${RESET}"
+echo -e "${RESET}${BOLD}Cores:${RESET} ${COLOR}$(nproc)${RESET}"
