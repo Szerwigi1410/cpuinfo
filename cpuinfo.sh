@@ -22,7 +22,8 @@ CONFIG_FILE="$HOME/.config/cpuinfo/config"
 if [[ ! -f "$CONFIG_FILE" ]]; then
     mkdir -p "$(dirname "$CONFIG_FILE")"
     echo -e "# Available COLOR_NAME options: RED, GREEN, BLUE, CYAN, WHITE, YELLOW, PURPLE, BLACK, GRAY" > "$CONFIG_FILE"
-	echo -e "COLOR_NAME=BLUE" >> "$CONFIG_FILE"
+	echo -e "COLOR_NAME=BLUE" > "$CONFIG_FILE"
+    echo -e "SECOND_COLOR_NAME=BLUE" >> "$CONFIG_FILE"
 fi
 
 # Load values from the config
@@ -30,6 +31,7 @@ source "$CONFIG_FILE"
 
 # Value of the color
 COLOR=${!COLOR_NAME}
+COLOR1=${!SECOND_COLOR_NAME}
 
 ## Info gathering
 if [ -f /etc/os-release ]; then
@@ -69,16 +71,16 @@ L3="$(lscpu | grep 'L3' |awk -F: '{print $2}'| xargs)"
 
 ## Displayer!
 
-echo -e "${RESET}${BOLD}OS:${RESER} ${COLOR}${OS_NAME} ${OS_VERSION}${RESET}"
-echo -e "${RESET}${BOLD}${RESET}"
-echo -e "${RESET}${BOLD}Architecture:${RESET} ${COLOR}$(uname -m)${RESET}"
-echo -e "${RESET}${BOLD}Brand:${RESET} ${COLOR}${BRAND}${RESET}"
-echo -e "${RESET}${BOLD}Model:${RESET} ${COLOR}${CPU_NAME}${RESET}"
-echo -e "${RESET}${BOLD}Cores:${RESET} ${COLOR}${CORE_NUM}${RESET}"
-echo -e "${RESET}${BOLD}Threads:${RESET} ${COLOR}${THREADS}${RESET}"
-echo -e "${RESET}${BOLD}Threads per core:${RESET} ${COLOR}${THREAD_PER}${RESET}"
-echo -e "${RESET}${BOLD}Min MHz: ${COLOR}${MIN_MHZ} Mhz${RESET}"
-echo -e "${RESET}${BOLD}Max MHz: ${COLOR}${MAX_MHZ} Mhz${RESET}"
-echo -e "${RESET}${BOLD}L1:${RESET} ${COLOR}${L1}${RESET}"
-echo -e "${RESET}${BOLD}L2:${RESET} ${COLOR}${L2}${RESET}"
-echo -e "${RESET}${BOLD}L3:${RESET} ${COLOR}${L3}${RESET}"
+echo -e "${COLOR1}${BOLD}OS:${RESER} ${COLOR}${OS_NAME} ${OS_VERSION}${RESET}"
+echo -e "${COLOR1}${BOLD}${RESET}"
+echo -e "${COLOR1}${BOLD}Architecture:${RESET} ${COLOR}$(uname -m)${RESET}"
+echo -e "${COLOR1}${BOLD}Brand:${RESET} ${COLOR}${BRAND}${RESET}"
+echo -e "${COLOR1}${BOLD}Model:${RESET} ${COLOR}${CPU_NAME}${RESET}"
+echo -e "${COLOR1}${BOLD}Cores:${RESET} ${COLOR}${CORE_NUM}${RESET}"
+echo -e "${COLOR1}${BOLD}Threads:${RESET} ${COLOR}${THREADS}${RESET}"
+echo -e "${COLOR1}${BOLD}Threads per core:${RESET} ${COLOR}${THREAD_PER}${RESET}"
+echo -e "${COLOR1}${BOLD}Min MHz: ${RESET}${COLOR}${MIN_MHZ} Mhz${RESET}"
+echo -e "${COLOR1}${BOLD}Max MHz: ${RESET}${COLOR}${MAX_MHZ} Mhz${RESET}"
+echo -e "${COLOR1}${BOLD}L1:${RESET} ${COLOR}${L1}${RESET}"
+echo -e "${COLOR1}${BOLD}L2:${RESET} ${COLOR}${L2}${RESET}"
+echo -e "${COLOR1}${BOLD}L3:${RESET} ${COLOR}${L3}${RESET}"
