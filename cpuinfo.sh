@@ -17,6 +17,9 @@ GRAY="\033[90m"
 
 # CONFIG
 CONFIG_FILE="$HOME/.config/cpuinfo/config"
+# Ascii dir
+ASCII_DIR="$HOME/.config/cpuinfo/logos"
+
 
 # If there is no config – create a default one.
 if [[ ! -f "$CONFIG_FILE" ]]; then
@@ -77,6 +80,8 @@ fi
 L1="$(lscpu | grep 'L1' |awk -F: '{print $2}'| xargs |head -1)"
 L2="$(lscpu | grep 'L2' |awk -F: '{print $2}'| xargs)"
 L3="$(lscpu | grep 'L3' |awk -F: '{print $2}'| xargs)"
+
+# CPU ascII art
 
 ## Displayer!
 
