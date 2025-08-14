@@ -17,9 +17,6 @@ GRAY="\033[90m"
 
 # CONFIG
 CONFIG_FILE="$HOME/.config/cpuinfo/config"
-# Ascii dir
-ASCII_DIR="$HOME/.config/cpuinfo/logos"
-
 
 # If there is no config – create a default one.
 if [[ ! -f "$CONFIG_FILE" ]]; then
