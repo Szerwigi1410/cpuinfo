@@ -65,6 +65,7 @@ MIN_MHZ="$(lscpu | grep 'CPU min MHz' | awk -F: '{print $2}' | xargs | sed 's/\.
 MAX_MHZ="$(lscpu | grep 'CPU max MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
 CUR_MHZ="$(lscpu | grep 'CPU MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
 
+CPU_SCL="$(lscpu | grep 'CPU(s) scaling MHz:' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
 # Fallback if min/max are empty
 if [[ -z "$MIN_MHZ" ]]; then
     MIN_MHZ="$CUR_MHZ"
@@ -162,6 +163,7 @@ echo -e "${COLOR1}${BOLD}Threads:${RESET} ${COLOR}${THREADS}${RESET}${ascii06}"
 echo -e "${COLOR1}${BOLD}Threads per core:${RESET} ${COLOR}${THREAD_PER}${RESET}${ascii07}"
 echo -e "${COLOR1}${BOLD}Min MHz: ${RESET}${COLOR}${MIN_MHZ} Mhz${RESET}${ascii08}"
 echo -e "${COLOR1}${BOLD}Max MHz: ${RESET}${COLOR}${MAX_MHZ} Mhz${RESET}"
+echo -e "${COLOR1}${BOLD}CPU(s) scaling MHz: ${RESET}${COLOR}${CPU_SCL}${RESET}"
 echo -e "${COLOR1}${BOLD}L1:${RESET} ${COLOR}${L1}${RESET}"
 echo -e "${COLOR1}${BOLD}L2:${RESET} ${COLOR}${L2}${RESET}"
 echo -e "${COLOR1}${BOLD}L3:${RESET} ${COLOR}${L3}${RESET}"
