@@ -79,6 +79,28 @@ L2="$(lscpu | grep 'L2' |awk -F: '{print $2}'| xargs)"
 L3="$(lscpu | grep 'L3' |awk -F: '{print $2}'| xargs)"
 
 # CPU ascII art
+case "$BRAND" in
+    intel)
+        88                              88  
+        ""              ,d              88  
+                        88              88  
+        88 8b,dPPYba, MM88MMM ,adPPYba, 88  
+        88 88P'   `"8a  88   a8P_____88 88  
+        88 88       88  88   8PP""""""" 88  
+        88 88       88  88,  "8b,   ,aa 88  
+        88 88       88  "Y888 `"Ybbd8"' 88  
+        ;;
+    amd)
+        
+        ;;
+    powerpc)
+        
+        ;;
+    *)
+        
+        ;;
+esac
+
 
 ## Displayer!
 
