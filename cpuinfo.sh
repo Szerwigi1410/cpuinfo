@@ -22,7 +22,7 @@ CONFIG_FILE="$HOME/.config/cpuinfo/config"
 if [[ ! -f "$CONFIG_FILE" ]]; then
     mkdir -p "$(dirname "$CONFIG_FILE")"
     echo -e "# Available COLOR_NAME options: RED, GREEN, BLUE, CYAN, WHITE, YELLOW, PURPLE, BLACK, GRAY" > "$CONFIG_FILE"
-	echo -e "COLOR_NAME=BLUE" > "$CONFIG_FILE"
+	echo -e "COLOR_NAME=WHITE" > "$CONFIG_FILE"
     echo -e "SECOND_COLOR_NAME=BLUE" >> "$CONFIG_FILE"
 fi
 
