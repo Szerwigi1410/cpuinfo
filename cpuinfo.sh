@@ -61,4 +61,4 @@ echo -e "${RESET}${BOLD}Model:${RESET} ${COLOR}${CPU_NAME}${RESET}"
 echo -e "${RESET}${BOLD}Cores:${RESET} ${COLOR}$(nproc)${RESET}"
 echo -e "${RESET}${BOLD}L1:${RESET} ${COLOR}${L1}${RESET}"
 echo -e "${RESET}${BOLD}L2:${RESET} ${COLOR}${L2}${RESET}"
-echo -e "${RESET}${BOLD}L3:${RESET} ${COLOR}${L3}${RESET}
+echo -e "${RESET}${BOLD}L3:${RESET} ${COLOR}${L3}${RESET}"
