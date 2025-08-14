@@ -16,7 +16,7 @@ BLACK="\033[30m"
 GRAY="\033[90m"
 
 # CONFIG
-CONFIG_FILE="$HOME/.config/brokefetch/config"
+CONFIG_FILE="$HOME/.config/cpuinfo/config"
 
 # If there is no config – create a default one.
 if [[ ! -f "$CONFIG_FILE" ]]; then
