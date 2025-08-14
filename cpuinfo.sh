@@ -22,7 +22,7 @@ CONFIG_FILE="$HOME/.config/cpuinfo/config"
 if [[ ! -f "$CONFIG_FILE" ]]; then
     mkdir -p "$(dirname "$CONFIG_FILE")"
     echo -e "# Available COLOR_NAME options: RED, GREEN, BLUE, CYAN, WHITE, YELLOW, PURPLE, BLACK, GRAY" > "$CONFIG_FILE"
-	echo -e "COLOR_NAME=WHITE" > "$CONFIG_FILE"
+	echo -e "COLOR_NAME=WHITE" >> "$CONFIG_FILE"
     echo -e "SECOND_COLOR_NAME=BLUE" >> "$CONFIG_FILE"
 fi
 
@@ -78,9 +78,30 @@ L1="$(lscpu | grep 'L1' |awk -F: '{print $2}'| xargs |head -1)"
 L2="$(lscpu | grep 'L2' |awk -F: '{print $2}'| xargs)"
 L3="$(lscpu | grep 'L3' |awk -F: '{print $2}'| xargs)"
 
+
+ASCII_OVERRIDE=""
+
+while getopts ":a:" option; do
+    case $option in
+        a)
+            ASCII_OVERRIDE="$OPTARG"
+            ;;
+        *)
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [[ -n "$ASCII_OVERRIDE" ]]; then
+    BRAND_TO_DISPLAY=$(echo "$ASCII_OVERRIDE" | tr '[:upper:]' '[:lower:]')
+else
+    BRAND_TO_DISPLAY=$(echo "$BRAND" | tr '[:upper:]' '[:lower:]')
+fi
+
+
 # CPU ascII art
-case "$BRAND" in
-    "Intelp")
+case "$BRAND_TO_DISPLAY" in
+    "intel")
         ascii00="                                    88                              88  "
         ascii01="                                                   --              ,d              88  "
         ascii02="                               88              88  "
@@ -91,16 +112,16 @@ case "$BRAND" in
         ascii07="                                88 88       88  \"Y888 \`\"Ybbd8\"' 88  "
         ascii08=""
         ;;
-    "Intel")
-        ascii00="                                   ⠀⠀⠀⠀⠀⠲⣶⣶⢶⡶⣶⢶⡶⣶⢶⠀⠀⠀⠀⠀"
-        ascii01="                                                  ⠀⠀⠀⠀⠀⠀⠈⢫⠿⠽⠯⠿⣽⢯⣟⠀⠀⠀⠀⠀"
-        ascii02="                              ⠀⠀⠀⠀⠀⠀⣠⣿⠀⠀⠀⠀⣟⡿⣽⠀⠀⠀⠀⠀"
-        ascii03="                                      ⠀⠀⠀⠀⠀⣼⣟⡷⠀⠀⠀⠀⣯⢿⡽⠀⠀⠀⠀⠀"
-        ascii04="   ⠀⠀⠀⠀⠀⣟⡾⣽⣻⣟⡿⠋⠙⢯⣿⠀⠀⠀⠀⠀"
-        ascii05="                                          ⠀⠀⠀⠀⠀⠛⠙⠓⠛⠊⠀⠀⠀⠀⠙⠀⠀⠀⠀⠀"
-        ascii06="                                        ⠀⠀⢸⣿⣿⠀⠀⢸⣿⣦⢠⣾⣿⠀⣿⡿⠿⣿⣦⠀"
-        ascii07="                                ⢠⣿⣇⣿⣧⠀⢸⣿⢻⡿⢻⣿⠀⣿⡇⠀⢸⣿⡆"
-        ascii08="                                  ⢀⣾⡟⠛⠛⢿⣇⢸⣿⠀⠀⢸⣿⠀⣿⣷⣶⠾⠟⠀"
+    "amd")
+        ascii00="${GREEN}                                   ⠀⠀⠀⠀⠀⠲⣶⣶⢶⡶⣶⢶⡶⣶⢶⠀⠀⠀⠀⠀"
+        ascii01="${GREEN}                                                  ⠀⠀⠀⠀⠀⠀⠈⢫⠿⠽⠯⠿⣽⢯⣟⠀⠀⠀⠀⠀"
+        ascii02="${GREEN}                              ⠀⠀⠀⠀⠀⠀⣠⣿⠀⠀⠀⠀⣟⡿⣽⠀⠀⠀⠀⠀"
+        ascii03="${GREEN}                                      ⠀⠀⠀⠀⠀⣼⣟⡷⠀⠀⠀⠀⣯⢿⡽⠀⠀⠀⠀⠀"
+        ascii04="${GREEN}   ⠀⠀⠀⠀⠀⣟⡾⣽⣻⣟⡿⠋⠙⢯⣿⠀⠀⠀⠀⠀"
+        ascii05="${GREEN}                                          ⠀⠀⠀⠀⠀⠛⠙⠓⠛⠊⠀⠀⠀⠀⠙⠀⠀⠀⠀⠀"
+        ascii06="${GRAY}                                        ⠀⠀⢸⣿⣿⠀⠀⢸⣿⣦⢠⣾⣿⠀⣿⡿⠿⣿⣦⠀"
+        ascii07="${GRAY}                                ⢠⣿⣇⣿⣧⠀⢸⣿⢻⡿⢻⣿⠀⣿⡇⠀⢸⣿⡆"
+        ascii08="${GRAY}                                  ⢀⣾⡟⠛⠛⢿⣇⢸⣿⠀⠀⢸⣿⠀⣿⣷⣶⠾⠟⠀"
         ;;
     "powerpc")
         
