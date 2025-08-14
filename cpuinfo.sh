@@ -49,7 +49,7 @@ fi
 
 L1="$(lscpu | grep 'L1' | head -1)"
 
-## Dispplayer!
+## Displayer!
 
 echo -e "${RESET}${BOLD}OS:${RESER} ${COLOR}${OS_NAME} ${OS_VERSION}${RESET}"
 echo -e "${RESET}${BOLD}${RESET}"
