@@ -78,7 +78,7 @@ L1="$(lscpu | grep 'L1' |awk -F: '{print $2}'| xargs |head -1)"
 L2="$(lscpu | grep 'L2' |awk -F: '{print $2}'| xargs)"
 L3="$(lscpu | grep 'L3' |awk -F: '{print $2}'| xargs)"
 
-
+# ASCII art override
 ASCII_OVERRIDE=""
 
 while getopts ":a:" option; do
@@ -92,11 +92,15 @@ while getopts ":a:" option; do
 done
 shift $((OPTIND-1))
 
+#normalize uppercase and lowercase
 if [[ -n "$ASCII_OVERRIDE" ]]; then
     BRAND_TO_DISPLAY=$(echo "$ASCII_OVERRIDE" | tr '[:upper:]' '[:lower:]')
 else
     BRAND_TO_DISPLAY=$(echo "$BRAND" | tr '[:upper:]' '[:lower:]')
 fi
+
+# Reset ASCII variables before assigning
+unset ascii00 ascii01 ascii02 ascii03 ascii04 ascii05 ascii06 ascii07 ascii08 ascii09 ascii10 ascii11 ascii12 ascii13 ascii14 ascii15 ascii16 ascii17 ascii18 ascii19
 
 
 # CPU ascII art
