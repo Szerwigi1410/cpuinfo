@@ -80,7 +80,7 @@ L3="$(lscpu | grep 'L3' |awk -F: '{print $2}'| xargs)"
 
 # CPU ascII art
 case "$BRAND" in
-    "Intel")
+    "Intelp")
         ascii00="                                    88                              88  "
         ascii01="                                                   --              ,d              88  "
         ascii02="                               88              88  "
@@ -89,9 +89,18 @@ case "$BRAND" in
         ascii05="                                           88 88       88  88   8PP\"\"\"\"\"\"\" 88  "
         ascii06="                                         88 88       88  88,  \"8b,   ,aa 88  "
         ascii07="                                88 88       88  \"Y888 \`\"Ybbd8\"' 88  "
+        ascii08=""
         ;;
-    "amd")
-        
+    "Intel")
+        ascii00="                                   ⠀⠀⠀⠀⠀⠲⣶⣶⢶⡶⣶⢶⡶⣶⢶⠀⠀⠀⠀⠀"
+        ascii01="                                                  ⠀⠀⠀⠀⠀⠀⠈⢫⠿⠽⠯⠿⣽⢯⣟⠀⠀⠀⠀⠀"
+        ascii02="                              ⠀⠀⠀⠀⠀⠀⣠⣿⠀⠀⠀⠀⣟⡿⣽⠀⠀⠀⠀⠀"
+        ascii03="                                      ⠀⠀⠀⠀⠀⣼⣟⡷⠀⠀⠀⠀⣯⢿⡽⠀⠀⠀⠀⠀"
+        ascii04="   ⠀⠀⠀⠀⠀⣟⡾⣽⣻⣟⡿⠋⠙⢯⣿⠀⠀⠀⠀⠀"
+        ascii05="                                          ⠀⠀⠀⠀⠀⠛⠙⠓⠛⠊⠀⠀⠀⠀⠙⠀⠀⠀⠀⠀"
+        ascii06="                                        ⠀⠀⢸⣿⣿⠀⠀⢸⣿⣦⢠⣾⣿⠀⣿⡿⠿⣿⣦⠀"
+        ascii07="                                ⢠⣿⣇⣿⣧⠀⢸⣿⢻⡿⢻⣿⠀⣿⡇⠀⢸⣿⡆"
+        ascii08="                                  ⢀⣾⡟⠛⠛⢿⣇⢸⣿⠀⠀⢸⣿⠀⣿⣷⣶⠾⠟⠀"
         ;;
     "powerpc")
         
@@ -104,7 +113,7 @@ esac
 
 ## Displayer!
 
-echo -e "${COLOR1}${BOLD}OS:${RESER} ${COLOR}${OS_NAME} ${OS_VERSION}${RESET}${ascii00}"
+echo -e "${COLOR1}${BOLD}OS:${RESET} ${COLOR}${OS_NAME} ${OS_VERSION}${RESET}${ascii00}"
 echo -e "${COLOR1}${BOLD}${RESET}${ascii01}"
 echo -e "${COLOR1}${BOLD}Architecture:${RESET} ${COLOR}$(uname -m)${RESET}${ascii02}"
 echo -e "${COLOR1}${BOLD}Brand:${RESET} ${COLOR}${BRAND}${RESET}${ascii03}"
@@ -112,7 +121,7 @@ echo -e "${COLOR1}${BOLD}Model:${RESET} ${COLOR}${CPU_NAME}${RESET}${ascii04}"
 echo -e "${COLOR1}${BOLD}Cores:${RESET} ${COLOR}${CORE_NUM}${RESET}${ascii05}"
 echo -e "${COLOR1}${BOLD}Threads:${RESET} ${COLOR}${THREADS}${RESET}${ascii06}"
 echo -e "${COLOR1}${BOLD}Threads per core:${RESET} ${COLOR}${THREAD_PER}${RESET}${ascii07}"
-echo -e "${COLOR1}${BOLD}Min MHz: ${RESET}${COLOR}${MIN_MHZ} Mhz${RESET}"
+echo -e "${COLOR1}${BOLD}Min MHz: ${RESET}${COLOR}${MIN_MHZ} Mhz${RESET}${ascii08}"
 echo -e "${COLOR1}${BOLD}Max MHz: ${RESET}${COLOR}${MAX_MHZ} Mhz${RESET}"
 echo -e "${COLOR1}${BOLD}L1:${RESET} ${COLOR}${L1}${RESET}"
 echo -e "${COLOR1}${BOLD}L2:${RESET} ${COLOR}${L2}${RESET}"
