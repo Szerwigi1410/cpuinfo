@@ -28,6 +28,9 @@ fi
 # Load values from the config
 source "$CONFIG_FILE"
 
+# Value of the color
+COLOR=${!COLOR_NAME}
+
 ## Info gathering
 if [ -f /etc/os-release ]; then
     . /etc/os-release
@@ -42,7 +45,8 @@ CPU_NAME="$(lscpu | grep 'Model name' | awk -F: '{print $2}' | xargs)"
 
 ## Dispplayer!
 
-echo -e "OS: ${GREEN}${OS_NAME} ${OS_VERSION}${RESET}"
-echo -e "Architecture: ${CYAN}$(uname -m)${RESET}"
-echo -e "CPU model: ${BLUE}${CPU_NAME}${RESET}"
-echo -e "Cores: ${YELLOW}$(nproc)${RESET}"
+echo -e "OS: ${COLOR}${OS_NAME} ${OS_VERSION}${RESET}"
+echo -e "------------------------------"
+echo -e "Architecture: ${COLOR}$(uname -m)${RESET}"
+echo -e "CPU model: ${COLOR}${CPU_NAME}${RESET}"
+echo -e "Cores: ${COLOR}$(nproc)${RESET}"
