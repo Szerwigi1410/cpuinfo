@@ -51,3 +51,12 @@ SECOND_COLOR_NAME=BLUE
 ```
 - `COLOR_NAME` - color of the info text
 - `SECOND_COLOR_NAME` - secondary color for labels
+You can edit these to customize the output colors.
+
+---
+
+## Usage Options
+- `-a <cpu brand name here> - overrife ASCII art brand, e.g.:
+```
+cpuinfo -a powerpc
+```
