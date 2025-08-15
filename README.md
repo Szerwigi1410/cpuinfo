@@ -34,3 +34,4 @@ cd cpuinfo
 chomd +x cpuinfo.sh
 ./cpuinfo.sh
 ```
+**Note:** lscpu must be installed for cpuinfo to work. See the Error Codes section below if it's missing.
