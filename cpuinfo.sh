@@ -42,6 +42,12 @@ source "$CONFIG_FILE"
 COLOR=${!COLOR_NAME}
 COLOR1=${!SECOND_COLOR_NAME}
 
+# Check if lscpu is installed
+if ! command -v lscpu &> /dev/null; then
+    echo -e "${RED}Error code 001: lscpu is not installed on your system.${RESET}"
+    exit 1
+fi
+
 ## Info gathering
 if [ -f /etc/os-release ]; then
     . /etc/os-release
