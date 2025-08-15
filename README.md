@@ -56,7 +56,7 @@ You can edit these to customize the output colors.
 ---
 
 ## Usage Options
-- `-a <cpu brand name here> - overrife ASCII art brand, e.g.:
+- `-a <cpu brand name here>` - overrife ASCII art brand, e.g.:
 ```
 cpuinfo -a powerpc
 ```
