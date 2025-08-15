@@ -74,4 +74,4 @@ sudo apt install lscpu
 sudo pacman -S util-linux
 ```
 
-That's all about cpufetch. Enjoy, contribute and have fun
+That's all about cpuinfo. Enjoy, contribute and have fun
