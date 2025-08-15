@@ -143,7 +143,7 @@ case "$BRAND_TO_DISPLAY" in
         ascii05="${GREEN}   ⠀⠀⠀⠀⠀⠛⠙⠓⠛⠊⠀⠀⠀⠀⠙⠀⠀⠀⠀⠀"
         ascii06="${GRAY} ⠀⠀⢸⣿⣿⠀⠀⢸⣿⣦⢠⣾⣿⠀⣿⡿⠿⣿⣦⠀"
         ascii07="${GRAY}  ⢠⣿⣇⣿⣧⠀⢸⣿⢻⡿⢻⣿⠀⣿⡇⠀⢸⣿⡆"
-        ascii08="${GRAY}⢀⣾⡟⠛⠛⢿⣇⢸⣿⠀⠀⢸⣿⠀⣿⣷⣶⠾⠟⠀"
+        ascii08="${GRAY} ⢀⣾⡟⠛⠛⢿⣇⢸⣿⠀⠀⢸⣿⠀⣿⣷⣶⠾⠟⠀"
         ;;
     "powerpc")
         ascii00="${BRIGHT_RED}   =%%%%%#=                                .#%%%%%*..+#%%%%#"
@@ -154,6 +154,17 @@ case "$BRAND_TO_DISPLAY" in
         ascii05="${RED}#%%+     =%%%%#-.#%%==%%%=  =%%%%#*%%#. =%%#:     .*#%%%=   "
         ;;
     "arm")
+        ascii00="${BLUE}⠀⠀⠀⣠⣴⣶⣶⣦⣠⣤⣤⣤⡄⠀⠀⣤⣤⣤⣤⣶⣶⣶⡄⢠⣤⣤⣄⣤⣶⣶⣦⣀⢀⣤⣶⣶⣶⣤⠀⠀"
+        ascii01="${BLUE}⠀⢰⣿⣿⣿⡿⠿⠿⣿⣿⣿⣿⡇⠀⠀⣿⣿⣿⣿⡿⠿⡿⠁⢸⣿⣿⣿⣿⠿⢿⣿⣿⣿⣿⠿⠿⣿⣿⣿⡄"
+        ascii02="${BLUE}⢰⣿⣿⣿⠇⠀⠀⠀⠈⣿⣿⣿⡇⠀⠀⣿⣿⣿⠆⠀⠀⠀⠀⢸⣿⣿⣿⠁⠀⠈⣿⣿⣿⡏⠀⠀⢿⣿⣿⡅"
+        ascii03="${BLUE}⢸⣿⣿⣟⠀⠀⠀⠀⠀⢹⣿⣿⡇⠀⠀⣿⣿⣿⠀⠀⠀⠀⠀⢸⣿⣿⣿⠀⠀⠀⣿⣿⣿⠃⠀⠀⢸⣿⣿⡇"
+        ascii04="${BLUE}⠘⣿⣿⣿⠄⠀⠀⠀⢀⣿⣿⣿⡇⠀⠀⣿⣿⣿⠀⠀⠀⠀⠀⢸⣿⣿⣿⠀⠀⠀⣿⣿⣿⠀⠀⠀⢸⣿⣿⡇"
+        ascii05="${BLUE}⠀⠉⢿⣿⣷⣧⣶⣶⣿⣿⣿⣿⡇⠀⠀⣿⣿⣿⠀⠀⠀⠀⠀⢸⣿⣿⣿⠀⠀⠀⣿⣿⣿⠀⠀⠀⢸⣿⣿⡇"
+        ascii06="${BLUE}⠀⠀⠈⠉⠻⠿⠟⠟⠙⠚⠛⠛⠃⠀⠀⠛⠛⠛⠀⠀⠀⠀⠀⠈⠛⠛⠛⠀⠀⠀⠛⠛⠛⠀⠀⠀⠘⠛⠛⠀"
+        ascii07=""
+        ascii08=""
+        ;;
+    "snapdragon")
         ascii00="${RED}⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⠠⠀⠀${WHITE}⠤⢀⠀⠀⠀⠀⠀⠀⠀"
         ascii01="${RED}⠀⠀⠀⢀⣤⢆⣴⡿⡟⠁⠀⠀⠀⠀⠀⠀${WHITE}⠑⠠⡀⠀⠀⠀"
         ascii02="${RED}⠀⠀⣴⡿⣷⣽⢯⣿⡃⠀⠀⠀⠀⠀⠀⠀⠀⠀${WHITE}⠈⠢⠀⠀"
@@ -184,7 +195,7 @@ esac
 
 info00="${COLOR1}${BOLD}OS:${RESET} ${COLOR}${OS_NAME} ${OS_VERSION}${RESET}                                    "
 info01="${COLOR1}${BOLD}${RESET}                                                   "
-info02="${COLOR1}${BOLD}Architecture:${RESET} ${COLOR}$(uname -m)${RESET}                              "
+info02="${COLOR1}${BOLD}Architecture:${RESET} ${COLOR}$(uname -m)${RESET}                               "
 info03="${COLOR1}${BOLD}Brand:${RESET} ${COLOR}${BRAND}${RESET}                                       "
 info04="${COLOR1}${BOLD}Model:${RESET} ${COLOR}${CPU_NAME}${RESET}    "
 info05="${COLOR1}${BOLD}Cores:${RESET} ${COLOR}${CORE_NUM}${RESET}                                           "
