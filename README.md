@@ -31,8 +31,8 @@ It supports CPUs from **Intel, AMD, PowerPC, ARM, Snapdragon**, and has a defaul
 ```bash
 git clone https://github.com/Szerwigi1410/cpuinfo.git
 cd cpuinfo
-chomd +x cpuinfo.sh
-./cpuinfo.sh
+chomd +x install.sh
+./install.sh
 ```
 **Note:** lscpu must be installed for cpuinfo to work. See the Error Codes section below if it's missing.
 
