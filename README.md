@@ -39,7 +39,6 @@ chomd +x cpuinfo.sh
 ---
 
 ## Configuration
-
 By default, a configuration file is created at:
 ```
 ~/.config/cpuinfo/config
