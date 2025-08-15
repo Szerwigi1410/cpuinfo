@@ -147,6 +147,9 @@ case "$BRAND_TO_DISPLAY" in
         ascii04="${BRIGHT_RED}-%%%==-:.*%%*#%%+*%%%#%%%%=-%%%#**+#%%+  *%%*-=-. =%%%##*.  "
         ascii05="${RED}#%%+     =%%%%#-.#%%==%%%=  =%%%%#*%%#. =%%#:     .*#%%%=   "
         ;;
+    "arm")
+    
+        ;;    
     *)
         ascii00="${WHITE}${BOLD}Damn bro"
         ascii01="${WHITE}${BOLD}Are you THAT broke to not have a normal CPU?"
