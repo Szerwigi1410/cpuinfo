@@ -49,5 +49,5 @@ it contains:
 COLOR_NAME=WHITE
 SECOND_COLOR_NAME=BLUE
 ```
-- COLOR_NAME - color of the info text
-- SECOND_COLOR_NAME - secondary color for labels
+- `COLOR_NAME` - color of the info text
+- `SECOND_COLOR_NAME` - secondary color for labels
