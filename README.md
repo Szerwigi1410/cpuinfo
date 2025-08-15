@@ -43,3 +43,11 @@ By default, a configuration file is created at:
 ```
 ~/.config/cpuinfo/config
 ```
+it contains:
+```
+# Available COLOR_NAME options: RED, GREEN, BLUE, CYAN, WHITE, YELLOW, PURPLE, BLACK, GRAY
+COLOR_NAME=WHITE
+SECOND_COLOR_NAME=BLUE
+```
+- COLOR_NAME - color of the info text
+- SECOND_COLOR_NAME - secondary color for labels
