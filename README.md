@@ -60,3 +60,18 @@ You can edit these to customize the output colors.
 ```
 cpuinfo -a powerpc
 ```
+
+## Error Codes
+- 001 - `lscpu` is not installed.
+
+install it using:
+
+```
+# Debian/Ubuntu
+sudo apt install lscpu
+
+# Arch Linux
+sudo pacman -S util-linux
+```
+
+That's all about cpufetch. Enjoy, contribute and have fun
