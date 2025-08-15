@@ -103,38 +103,40 @@ fi
 # Reset ASCII variables before assigning
 unset ascii00 ascii01 ascii02 ascii03 ascii04 ascii05 ascii06 ascii07 ascii08 ascii09 ascii10 ascii11 ascii12 ascii13 ascii14 ascii15 ascii16 ascii17 ascii18 ascii19
 
+# Reset info variables before assigning
+unset info00 info01 info02 info03 info04 info05 info06 info07 info08 info09 info10 info11 info12 info13
 
 # CPU ascII art
 case "$BRAND_TO_DISPLAY" in
     "intel")
-        ascii00="${CYAN}                                    88                              88  "
-        ascii01="${CYAN}                                                   --              ,d              88  "
-        ascii02="${CYAN}                               88              88              88"
-        ascii03="${CYAN}                                       88 8b,dPPYba, MM88MMM ,adPPYba, 88  "
-        ascii04="${CYAN}    88 88P'   \`\"8a  88   a8P_____88 88  "
-        ascii05="${CYAN}                                           88 88       88  88   8PP\"\"\"\"\"\"\" 88  "
-        ascii06="${CYAN}                                         88 88       88  88,  \"8b,   ,aa 88  "
-        ascii07="${CYAN}                                88 88       88  \"Y888 \`\"Ybbd8\"' 88  "
+        ascii00="${CYAN}88                              88  "
+        ascii01="${CYAN}--              ,d              88  "
+        ascii02="${CYAN}88              88              88"
+        ascii03="${CYAN}88 8b,dPPYba, MM88MMM ,adPPYba, 88  "
+        ascii04="${CYAN}88 88P'   \`\"8a  88   a8P_____88 88  "
+        ascii05="${CYAN}88 88       88  88   8PP\"\"\"\"\"\"\" 88  "
+        ascii06="${CYAN}88 88       88  88,  \"8b,   ,aa 88  "
+        ascii07="${CYAN}88 88       88  \"Y888 \`\"Ybbd8\"' 88  "
         ascii08="${CYAN}"
         ;;
     "amd")
-        ascii00="${GREEN}                                   ⠀⠀⠀⠀⠀⠲⣶⣶⢶⡶⣶⢶⡶⣶⢶⠀⠀⠀⠀⠀"
-        ascii01="${GREEN}                                                  ⠀⠀⠀⠀⠀⠀⠈⢫⠿⠽⠯⠿⣽⢯⣟⠀⠀⠀⠀⠀"
-        ascii02="${GREEN}                              ⠀⠀⠀⠀⠀⠀⣠⣿⠀⠀⠀⠀⣟⡿⣽⠀⠀⠀⠀⠀"
-        ascii03="${GREEN}                                      ⠀⠀⠀⠀⠀⣼⣟⡷⠀⠀⠀⠀⣯⢿⡽⠀⠀⠀⠀⠀"
+        ascii00="${GREEN}   ⠀⠀⠀⠀⠀⠲⣶⣶⢶⡶⣶⢶⡶⣶⢶⠀⠀⠀⠀⠀"
+        ascii01="${GREEN}   ⠀⠀⠀⠀⠀⠀⠈⢫⠿⠽⠯⠿⣽⢯⣟⠀⠀⠀⠀⠀"
+        ascii02="${GREEN}   ⠀⠀⠀⠀⠀⠀⣠⣿⠀⠀⠀⠀⣟⡿⣽⠀⠀⠀⠀⠀"
+        ascii03="${GREEN}   ⠀⠀⠀⠀⠀⣼⣟⡷⠀⠀⠀⠀⣯⢿⡽⠀⠀⠀⠀⠀"
         ascii04="${GREEN}   ⠀⠀⠀⠀⠀⣟⡾⣽⣻⣟⡿⠋⠙⢯⣿⠀⠀⠀⠀⠀"
-        ascii05="${GREEN}                                          ⠀⠀⠀⠀⠀⠛⠙⠓⠛⠊⠀⠀⠀⠀⠙⠀⠀⠀⠀⠀"
-        ascii06="${GRAY}                                        ⠀⠀⢸⣿⣿⠀⠀⢸⣿⣦⢠⣾⣿⠀⣿⡿⠿⣿⣦⠀"
-        ascii07="${GRAY}                                ⢠⣿⣇⣿⣧⠀⢸⣿⢻⡿⢻⣿⠀⣿⡇⠀⢸⣿⡆"
-        ascii08="${GRAY}                                  ⢀⣾⡟⠛⠛⢿⣇⢸⣿⠀⠀⢸⣿⠀⣿⣷⣶⠾⠟⠀"
+        ascii05="${GREEN}   ⠀⠀⠀⠀⠀⠛⠙⠓⠛⠊⠀⠀⠀⠀⠙⠀⠀⠀⠀⠀"
+        ascii06="${GRAY} ⠀⠀⢸⣿⣿⠀⠀⢸⣿⣦⢠⣾⣿⠀⣿⡿⠿⣿⣦⠀"
+        ascii07="${GRAY}  ⢠⣿⣇⣿⣧⠀⢸⣿⢻⡿⢻⣿⠀⣿⡇⠀⢸⣿⡆"
+        ascii08="${GRAY}⢀⣾⡟⠛⠛⢿⣇⢸⣿⠀⠀⢸⣿⠀⣿⣷⣶⠾⠟⠀"
         ;;
     "powerpc")
-        ascii00="   =%%%%%#=                                .#%%%%%*..+#%%%%#"
-        ascii01="  :#%%*#%%#-+***+:+*=:+++:=*+=+*##*: +*+=+++%%#*%%%+#%%#+++:"
-        ascii02="  *%%*=#%%#%%#%%%*%%##%%%*%%#%%%#%@*+%%@@%*%%%=+%%**##+.    "
-        ascii03=" =%%##@%#*##*-*##*%%%%%%%%%*#%#+%%%+%%%*--#%%*%%%++%%%:     "
-        ascii04="-%%%==-:.*%%*#%%+*%%%#%%%%=-%%%#**+#%%+  *%%*-=-. =%%%##*.  "
-        ascii05="#%%+     =%%%%#-.#%%==%%%=  =%%%%#*%%#. =%%#:     .*#%%%=   "
+        ascii00="${RED}   =%%%%%#=                                .#%%%%%*..+#%%%%#"
+        ascii01="${RED}  :#%%*#%%#-+***+:+*=:+++:=*+=+*##*: +*+=+++%%#*%%%+#%%#+++:"
+        ascii02="${RED}  *%%*=#%%#%%#%%%*%%##%%%*%%#%%%#%@*+%%@@%*%%%=+%%**##+.    "
+        ascii03="${RED} =%%##@%#*##*-*##*%%%%%%%%%*#%#+%%%+%%%*--#%%*%%%++%%%:     "
+        ascii04="${RED}-%%%==-:.*%%*#%%+*%%%#%%%%=-%%%#**+#%%+  *%%*-=-. =%%%##*.  "
+        ascii05="${RED}#%%+     =%%%%#-.#%%==%%%=  =%%%%#*%%#. =%%#:     .*#%%%=   "
         
         ;;
     *)
@@ -151,19 +153,35 @@ case "$BRAND_TO_DISPLAY" in
 esac
 
 
-## Displayer!
+#info values
 
-echo -e "${COLOR1}${BOLD}OS:${RESET} ${COLOR}${OS_NAME} ${OS_VERSION}${RESET}${ascii00}"
-echo -e "${COLOR1}${BOLD}${RESET}${ascii01}"
-echo -e "${COLOR1}${BOLD}Architecture:${RESET} ${COLOR}$(uname -m)${RESET}${ascii02}"
-echo -e "${COLOR1}${BOLD}Brand:${RESET} ${COLOR}${BRAND}${RESET}${ascii03}"
-echo -e "${COLOR1}${BOLD}Model:${RESET} ${COLOR}${CPU_NAME}${RESET}${ascii04}"
-echo -e "${COLOR1}${BOLD}Cores:${RESET} ${COLOR}${CORE_NUM}${RESET}${ascii05}"
-echo -e "${COLOR1}${BOLD}Threads:${RESET} ${COLOR}${THREADS}${RESET}${ascii06}"
-echo -e "${COLOR1}${BOLD}Threads per core:${RESET} ${COLOR}${THREAD_PER}${RESET}${ascii07}"
-echo -e "${COLOR1}${BOLD}Min MHz: ${RESET}${COLOR}${MIN_MHZ} Mhz${RESET}${ascii08}"
-echo -e "${COLOR1}${BOLD}Max MHz: ${RESET}${COLOR}${MAX_MHZ} Mhz${RESET}"
-echo -e "${COLOR1}${BOLD}CPU(s) scaling MHz: ${RESET}${COLOR}${CPU_SCL}${RESET}"
-echo -e "${COLOR1}${BOLD}L1:${RESET} ${COLOR}${L1}${RESET}"
-echo -e "${COLOR1}${BOLD}L2:${RESET} ${COLOR}${L2}${RESET}"
-echo -e "${COLOR1}${BOLD}L3:${RESET} ${COLOR}${L3}${RESET}"
+info00="${COLOR1}${BOLD}OS:${RESET} ${COLOR}${OS_NAME} ${OS_VERSION}${RESET}                                    "
+info01="${COLOR1}${BOLD}${RESET}                                                   "
+info02="${COLOR1}${BOLD}Architecture:${RESET} ${COLOR}$(uname -m)${RESET}$                              "
+info03="${COLOR1}${BOLD}Brand:${RESET} ${COLOR}${BRAND}${RESET}                                       "
+info04="${COLOR1}${BOLD}Model:${RESET} ${COLOR}${CPU_NAME}${RESET}    "
+info05="${COLOR1}${BOLD}Cores:${RESET} ${COLOR}${CORE_NUM}${RESET}                                           "
+info06="${COLOR1}${BOLD}Threads:${RESET} ${COLOR}${THREADS}${RESET}                                         "
+info07="${COLOR1}${BOLD}Threads per core:${RESET} ${COLOR}${THREAD_PER}${RESET}                                "
+info08="${COLOR1}${BOLD}Min MHz: ${RESET}${COLOR}${MIN_MHZ} Mhz${RESET}                                    "
+info09="${COLOR1}${BOLD}Max MHz: ${RESET}${COLOR}${MAX_MHZ} Mhz${RESET}"
+info10="${COLOR1}${BOLD}CPU(s) scaling MHz: ${RESET}${COLOR}${CPU_SCL}${RESET}"
+info11="${COLOR1}${BOLD}L1:${RESET} ${COLOR}${L1}${RESET}"
+info12="${COLOR1}${BOLD}L2:${RESET} ${COLOR}${L2}${RESET}"
+info13="${COLOR1}${BOLD}L3:${RESET} ${COLOR}${L3}${RESET}"
+
+# Displayer!
+echo -e "${info00}${ascii00}"
+echo -e "${info01}${ascii01}"
+echo -e "${info02}${ascii02}"
+echo -e "${info03}${ascii03}"
+echo -e "${info04}${ascii04}"
+echo -e "${info05}${ascii05}"
+echo -e "${info06}${ascii06}"
+echo -e "${info07}${ascii07}"
+echo -e "${info08}${ascii08}"
+echo -e "${info09}"
+echo -e "${info10}"
+echo -e "${info11}"
+echo -e "${info12}"
+echo -e "${info13}"
