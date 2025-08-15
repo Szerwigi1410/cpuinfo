@@ -15,6 +15,15 @@ RESET="\033[0m"
 BLACK="\033[30m"
 GRAY="\033[90m"
 
+# Bright colors
+BRIGHT_RED="\033[91m"
+BRIGHT_GREEN="\033[92m"
+BRIGHT_YELLOW="\033[93m"
+BRIGHT_BLUE="\033[94m"
+BRIGHT_PURPLE="\033[95m"
+BRIGHT_CYAN="\033[96m"
+BRIGHT_WHITE="\033[97m"
+
 # CONFIG
 CONFIG_FILE="$HOME/.config/cpuinfo/config"
 
@@ -132,7 +141,7 @@ case "$BRAND_TO_DISPLAY" in
         ;;
     "powerpc")
         ascii00="${RED}   =%%%%%#=                                .#%%%%%*..+#%%%%#"
-        ascii01="${RED}  :#%%*#%%#-+***+:+*=:+++:=*+=+*##*: +*+=+++%%#*%%%+#%%#+++:"
+        ascii01="${BRIGHT_RED}  :#%%*#%%#-+***+:+*=:+++:=*+=+*##*: +*+=+++%%#*%%%+#%%#+++:"
         ascii02="${RED}  *%%*=#%%#%%#%%%*%%##%%%*%%#%%%#%@*+%%@@%*%%%=+%%**##+.    "
         ascii03="${RED} =%%##@%#*##*-*##*%%%%%%%%%*#%#+%%%+%%%*--#%%*%%%++%%%:     "
         ascii04="${RED}-%%%==-:.*%%*#%%+*%%%#%%%%=-%%%#**+#%%+  *%%*-=-. =%%%##*.  "
