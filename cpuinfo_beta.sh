@@ -243,6 +243,25 @@ case "$BRAND_TO_DISPLAY" in
         ascii09="${RED}⠀⠀⠸⣿⣞⡷⣿⣻⢼⣿⢯⣟⣿⣿⠏⠀⠀⠀${WHITE}⢀⠜⠀⠀"
         ascii10="${RED}⠀⠀⠀⠈⠉⠿⣷⣻⣻⣽⣿⡿⠟⠋${WHITE}⡀⢀⠠⠀⠁⠀⠀"
         ;;
+    "apple")
+        ascii00="                    'c.          "
+        ascii01="                 ,xNMM.          "
+        ascii02="               .OMMMMo           "
+        ascii03="               OMMM0,            "
+        ascii04="     .;loddo:' loolloddol;.      "
+        ascii05="   cKMMMMMMMMMMNWMMMMMMMMMM0:    "
+        ascii06=" .KMMMMMMMMMMMMMMMMMMMMMMMWd.    "
+        ascii07=" XMMMMLMMMMMMMMMMMMMMMMMMX.      "
+        ascii08=";MMMMMMIMMMMMMMMMMMMMMMMM:       "
+        ascii09=":MMMMMMMNMMMMMMMMMMMMMMMM:       "
+        ascii10=".MMMMMMMMUMMMMMMMMMMMMMMMX.      "
+        ascii11=" kMMMMMMMMXMMMMMMMMMMMMMMMWd.    "
+        ascii12=" .XMMMMMMMMMMMMMMMMMMMMMMMMMMk   "
+        ascii13="  .XMMMMMMMMMMMMMMMMMMMMMMMMK.   "
+        ascii14="    kMMMMMMMMMMMMMMMMMMMMMMd     "
+        ascii15="     ;KMMMMMMMWXXWMMMMMMMk.      "
+        ascii16="       .cooc,.    .,coo:.        "
+        ;;        
     *)
         ascii00="${WHITE}${BOLD}Damn bro"
         ascii01="${WHITE}${BOLD}Are you THAT broke to not have a normal CPU?"
