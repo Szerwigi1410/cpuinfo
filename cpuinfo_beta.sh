@@ -244,24 +244,20 @@ case "$BRAND_TO_DISPLAY" in
         ascii10="${RED}⠀⠀⠀⠈⠉⠿⣷⣻⣻⣽⣿⡿⠟⠋${WHITE}⡀⢀⠠⠀⠁⠀⠀"
         ;;
     "apple")
-        ascii00="                    'c.          "
-        ascii01="                 ,xNMM.          "
-        ascii02="               .OMMMMo           "
-        ascii03="               OMMM0,            "
-        ascii04="     .;loddo:' loolloddol;.      "
-        ascii05="   cKMMMMMMMMMMNWMMMMMMMMMM0:    "
-        ascii06=" .KMMMMMMMMMMMMMMMMMMMMMMMWd.    "
-        ascii07=" XMMMMLMMMMMMMMMMMMMMMMMMX.      "
-        ascii08=";MMMMMMIMMMMMMMMMMMMMMMMM:       "
-        ascii09=":MMMMMMMNMMMMMMMMMMMMMMMM:       "
-        ascii10=".MMMMMMMMUMMMMMMMMMMMMMMMX.      "
-        ascii11=" kMMMMMMMMXMMMMMMMMMMMMMMMWd.    "
-        ascii12=" .XMMMMMMMMMMMMMMMMMMMMMMMMMMk   "
-        ascii13="  .XMMMMMMMMMMMMMMMMMMMMMMMMK.   "
-        ascii14="    kMMMMMMMMMMMMMMMMMMMMMMd     "
-        ascii15="     ;KMMMMMMMWXXWMMMMMMMk.      "
-        ascii16="       .cooc,.    .,coo:.        "
-        ;;        
+        ascii00="⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⡄⠀⠀⠀⠀⠀"
+        ascii01="⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⠃⠀⠀⠀⠀⠀"
+        ascii02="⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⠿⠃⠀⠀⠀⠀⠀⠀"
+        ascii03="⠀⠀⣠⣴⣶⣶⣶⣶⣦⣬⣭⣥⣶⣾⣿⣿⣶⣦⡀⠀"
+        ascii04="⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠀"
+        ascii05="⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀"
+        ascii06="⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀"
+        ascii07="⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀"
+        ascii08="⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⡀⠀"
+        ascii09="⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡶"
+        ascii10="⠀⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠁"
+        ascii11="⠀⠀⠘⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀"
+        ascii12="⠀⠀⠀⠀⠙⠛⠛⠛⠉⠉⠉⠉⠙⠛⠛⠛⠁⠀⠀⠀"
+        ;;                
     *)
         ascii00="${WHITE}${BOLD}Damn bro"
         ascii01="${WHITE}${BOLD}Are you THAT broke to not have a normal CPU?"
@@ -278,34 +274,46 @@ esac
 
 #info values
 
-info00="${COLOR1}${BOLD}OS:${RESET} ${COLOR}${OS_NAME} ${OS_VERSION}${RESET}                                    "
-info01="${COLOR1}${BOLD}${RESET}                                                   "
-info02="${COLOR1}${BOLD}Architecture:${RESET} ${COLOR}$(uname -m)${RESET}                               "
-info03="${COLOR1}${BOLD}Brand:${RESET} ${COLOR}${BRAND}${RESET}                                       "
-info04="${COLOR1}${BOLD}Model:${RESET} ${COLOR}${CPU_NAME}${RESET}    "
-info05="${COLOR1}${BOLD}Cores:${RESET} ${COLOR}${CORE_NUM}${RESET}                                           "
-info06="${COLOR1}${BOLD}Threads:${RESET} ${COLOR}${THREADS}${RESET}                                         "
-info07="${COLOR1}${BOLD}Threads per core:${RESET} ${COLOR}${THREAD_PER}${RESET}                                "
-info08="${COLOR1}${BOLD}Min MHz: ${RESET}${COLOR}${MIN_MHZ} Mhz${RESET}                                   "
-info09="${COLOR1}${BOLD}Max MHz: ${RESET}${COLOR}${MAX_MHZ} Mhz${RESET}                                  "
-info10="${COLOR1}${BOLD}CPU(s) scaling MHz: ${RESET}${COLOR}${CPU_SCL}${RESET}                           "
+info00="${COLOR1}${BOLD}OS:${RESET} ${COLOR}${OS_NAME} ${OS_VERSION}${RESET}" #                                    "
+info01="${COLOR1}${BOLD}${RESET}" #                                                   "
+info02="${COLOR1}${BOLD}Architecture:${RESET} ${COLOR}$(uname -m)${RESET}" #                               "
+info03="${COLOR1}${BOLD}Brand:${RESET} ${COLOR}${BRAND}${RESET}" #                                       "
+info04="${COLOR1}${BOLD}Model:${RESET} ${COLOR}${CPU_NAME}${RESET}" #    "
+info05="${COLOR1}${BOLD}Cores:${RESET} ${COLOR}${CORE_NUM}${RESET}" #                                           "
+info06="${COLOR1}${BOLD}Threads:${RESET} ${COLOR}${THREADS}${RESET}" #                                         "
+info07="${COLOR1}${BOLD}Threads per core:${RESET} ${COLOR}${THREAD_PER}${RESET}" #                                "
+info08="${COLOR1}${BOLD}Min MHz: ${RESET}${COLOR}${MIN_MHZ} Mhz${RESET}" #                                   "
+info09="${COLOR1}${BOLD}Max MHz: ${RESET}${COLOR}${MAX_MHZ} Mhz${RESET}" #                                  "
+info10="${COLOR1}${BOLD}CPU(s) scaling MHz: ${RESET}${COLOR}${CPU_SCL}${RESET}" #                                  "
 info11="${COLOR1}${BOLD}L1:${RESET} ${COLOR}${L1}${RESET}"
 info12="${COLOR1}${BOLD}L2:${RESET} ${COLOR}${L2}${RESET}"
 info13="${COLOR1}${BOLD}L3:${RESET} ${COLOR}${L3}${RESET}"
 
-# Displayer!
-echo -e "${info00}${ascii00}"
-echo -e "${info01}${ascii01}"
-echo -e "${info02}${ascii02}"
-echo -e "${info03}${ascii03}"
-echo -e "${info04}${ascii04}"
-echo -e "${info05}${ascii05}"
-echo -e "${info06}${ascii06}"
-echo -e "${info07}${ascii07}"
-echo -e "${info08}${ascii08}"
-echo -e "${info09}${ascii09}"
-echo -e "${info10}${ascii10}"
-echo -e "${info11}${ascii11}"
-echo -e "${info12}"
-echo -e "${info13}"
+# Displayer! (dynamic, padded)
+info_vars=( "$info00" "$info01" "$info02" "$info03" "$info04" "$info05" "$info06" "$info07" "$info08" "$info09" "$info10" "$info11" "$info12" "$info13" )
+ascii_vars=( "$ascii00" "$ascii01" "$ascii02" "$ascii03" "$ascii04" "$ascii05" "$ascii06" "$ascii07" "$ascii08" "$ascii09" "$ascii10" "$ascii11" "$ascii12" "$ascii13" "$ascii14" "$ascii15" "$ascii16" "$ascii17" "$ascii18" "$ascii19" )
+
+# Find max visible length of info variables (ignoring color codes)
+max_len=0
+for info in "${info_vars[@]}"; do
+    visible_len=$(echo -e "$info" | sed 's/\x1b\[[0-9;]*m//g' | wc -c)
+    visible_len=$((visible_len - 1))
+    (( visible_len > max_len )) && max_len=$visible_len
+done
+
+# Pad info variables
+for i in "${!info_vars[@]}"; do
+    visible_len=$(echo -e "${info_vars[i]}" | sed 's/\x1b\[[0-9;]*m//g' | wc -c)
+    visible_len=$((visible_len - 1))
+    pad_len=$((max_len - visible_len))
+    info_vars[i]="${info_vars[i]}$(printf '%*s' "$pad_len")"
+done
+
+# Print info + ASCII
+for i in "${!info_vars[@]}"; do
+    echo -e "${info_vars[i]}${ascii_vars[i]}"
+done
+
+
+
 
