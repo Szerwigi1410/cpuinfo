@@ -3,6 +3,18 @@
 # This script interactively installs either 'brokefetch.sh' or 'brokefetch_EDGE.sh'
 # from the current directory to /usr/bin. It prompts the user for choices.
 
+GREEN="\033[32m"
+RED="\033[31m"
+BLUE="\033[34m"
+CYAN="\033[36m"
+WHITE="\033[37m"
+YELLOW="\033[33m"
+PURPLE="\033[35m"
+BOLD="\033[1m"
+RESET="\033[0m"
+BLACK="\033[30m"
+GRAY="\033[90m"
+
 # --- Step 1: Identify available source files ---
 
 available_scripts=()
@@ -12,7 +24,7 @@ fi
 
 # Exit if no source files are found
 if [ ${#available_scripts[@]} -eq 0 ]; then
-    echo "Error: cpuinfo.sh was not found in the current directory."
+    echo -e "${RED}Error code 002:${RESET} cpuinfo.sh was not found in the current directory."
     exit 1
 fi
 
@@ -76,7 +88,7 @@ if [ -f "/usr/bin/cpuinfo" ]; then
     echo "Success! '$source_file' is now installed as 'cpuinfo'."
     echo "You can run it from any directory by typing 'cpuinfo'."
 else
-    echo "An error occurred during installation."
+    echo -e "${RED}Error code 003:${RESET} an occurred during installation."
     exit 1
 fi
 

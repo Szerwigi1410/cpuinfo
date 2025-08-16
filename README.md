@@ -63,6 +63,8 @@ cpuinfo -a powerpc
 
 ## Error Codes
 - 001 - `lscpu` is not installed.
+- 002 - `cpuinfo.sh` was not found in the current directory. (Try to re-clone the repo)
+- 003 - Instalation process falied
 
 install it using:
 
