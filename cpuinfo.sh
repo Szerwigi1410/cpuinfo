@@ -110,6 +110,7 @@ while getopts ":ha:" option; do
             ;;
         *)  
             echo -e "${RED}Unknown option:${RESET} -$OPTARG"
+            echo "Use '-h' to display the help screen"
             exit;;
     esac
 done
