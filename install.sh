@@ -21,10 +21,14 @@ available_scripts=()
 if [ -f "cpuinfo.sh" ]; then
     available_scripts+=("cpuinfo.sh")
 fi
+if [ -f "cpuinfo_beta.sh" ]; then
+    available_scripts+=("cpuinfo_beta.sh")
+fi
+
 
 # Exit if no source files are found
 if [ ${#available_scripts[@]} -eq 0 ]; then
-    echo -e "${RED}Error code 002:${RESET} cpuinfo.sh was not found in the current directory."
+    echo -e "${RED}Error code 002:${RESET} cpuinfo.sh and cpuinfo_beta.sh were not found in the current directory."
     exit 1
 fi
 
