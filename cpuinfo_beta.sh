@@ -72,7 +72,7 @@ fi
 if [[ "$LSCPU_HERE" == true ]]; then
     BRAND="$(lscpu | grep -Eio 'intel|amd|powerpc' | head -1)"
 elif [[ "$LSCPU_HERE" == false ]]; then
-    BRAND="$(sysctl -n machdep.cpu.brand_string | grep -Eio 'intel|apple')"
+    BRAND="$(sysctl -n machdep.cpu.brand_string | grep -Eio 'intel|Apple')"
 else
     BRAND="Unkown"
 fi
