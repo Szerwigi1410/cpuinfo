@@ -100,8 +100,19 @@ fi
     
 
 # MHz
-MIN_MHZ="$(lscpu | grep 'CPU min MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
-MAX_MHZ="$(lscpu | grep 'CPU max MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
+if [[ "$LSCPU_HERE" == true ]]; then
+    MIN_MHZ="$(lscpu | grep 'CPU min MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
+else
+    MIN_MHZ="$(( $(sysctl -n hw.cpufrequency_min) / 1000000 ))"
+fi
+
+
+if [[ "$LSCPU_HERE" == true ]]; then
+    MAX_MHZ="$(lscpu | grep 'CPU max MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
+else
+    MAX_MHZ="$(( $(sysctl -n hw.cpufrequency_max) / 1000000 ))"
+fi
+
 CUR_MHZ="$(lscpu | grep 'CPU MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
 
 CPU_SCL="$(lscpu | grep 'CPU(s) scaling MHz:' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
