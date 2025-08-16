@@ -70,7 +70,9 @@ fi
 # CPU BRAND
 BRAND="$(lscpu | grep -Eio 'intel|amd|powerpc' | head -1)"
 if [ -z "$BRAND" ]; then
-    BRAND="Unknown"
+    BRAND="$(sysctl -n machdep.cpu.brand_string | grep -Eio 'intel')"
+else
+    BRAND="Unkown"
 fi
 
 # Number of cores
