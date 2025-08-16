@@ -97,13 +97,20 @@ L3="$(lscpu | grep 'L3' |awk -F: '{print $2}'| xargs)"
 # ASCII art override
 ASCII_OVERRIDE=""
 
-while getopts ":a:" option; do
+while getopts ":ha:" option; do
     case $option in
-        a)
+        h) 
+            echo "Usage:"
+            echo "-a [cpu brand here] to overrite ascii art"
+            echo "-h to display this help screen"
+            echo -e "The config file is located at ${BOLD}~/.config/cpuinfo/${RESET}"
+            exit;;
+        a)  
             ASCII_OVERRIDE="$OPTARG"
             ;;
-        *)
-            ;;
+        *)  
+            echo -e "${RED}Unknown option:${RESET} -$OPTARG"
+            exit;;
     esac
 done
 shift $((OPTIND-1))
