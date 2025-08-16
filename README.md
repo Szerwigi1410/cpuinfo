@@ -24,6 +24,13 @@ It supports CPUs from **Intel, AMD, PowerPC, ARM, Snapdragon**, and has a defaul
 
 ---
 
+## Files
+
+- `cpuinfo.sh` - stable "Just works"
+- `cpuinfo_beta.sh` - might contain bugs (experimental macos support)
+
+---
+
 ## Installation
 
 1. Clone the repository:
