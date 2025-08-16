@@ -45,10 +45,11 @@ COLOR=${!COLOR_NAME}
 COLOR1=${!SECOND_COLOR_NAME}
 
 # Check if lscpu is installed
-#if ! command -v lscpu &> /dev/null; then
-#    echo -e "${RED}Error code 001: lscpu is not installed on your system.${RESET}"
-#    exit 1
-#fi
+if ! command -v lscpu &> /dev/null; then
+    LSCPU_HERE=false
+else
+    LSCPU_HERE=true
+fi
 
 ## Info gathering
 if [ -f /etc/os-release ]; then
@@ -68,8 +69,9 @@ else
 fi
 
 # CPU BRAND
-BRAND="$(lscpu | grep -Eio 'intel|amd|powerpc' | head -1)"
-if [ -z "$BRAND" ]; then
+if [[ "$LSCPU_HERE" == true ]]; then
+    BRAND="$(lscpu | grep -Eio 'intel|amd|powerpc' | head -1)"
+elif [[ "$LSCPU_HERE" == false ]]; then
     BRAND="$(sysctl -n machdep.cpu.brand_string | grep -Eio 'intel')"
 else
     BRAND="Unkown"
