@@ -78,11 +78,19 @@ else
 fi
 
 # Number of cores
-CORE_NUM="$(lscpu | grep 'Core(s) per socket' | awk -F: '{print $2}' | xargs)"
+if [[ "$LSCPU_HERE" == true ]]; then
+    CORE_NUM="$(lscpu | grep 'Core(s) per socket' | awk -F: '{print $2}' | xargs)"
+else
+    CORE_NUM="$(sysctl -n hw.physicalcpu)"
+fi
 
 # Threads
 
-THREADS="$(nproc)"
+if [[ "$LSCPU_HERE" == true ]]; then
+    THREADS="$(nproc)"
+else
+    THREADS="$(sysctl -n hw.logicalcpu)"
+fi
 
 THREAD_PER="$(lscpu | grep 'Thread(s) per core' | awk -F: '{print $2}' | xargs)"
 
