@@ -92,7 +92,12 @@ else
     THREADS="$(sysctl -n hw.logicalcpu)"
 fi
 
-THREAD_PER="$(lscpu | grep 'Thread(s) per core' | awk -F: '{print $2}' | xargs)"
+if [[ "$LSCPU_HERE" == true ]]; then
+    THREAD_PER="$(lscpu | grep 'Thread(s) per core' | awk -F: '{print $2}' | xargs)"
+else
+    THREAD_PER=$(( THREADS / CORE_NUM ))
+fi
+    
 
 # MHz
 MIN_MHZ="$(lscpu | grep 'CPU min MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
