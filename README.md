@@ -66,7 +66,7 @@ cpuinfo -a powerpc
 - 002 - `cpuinfo.sh` was not found in the current directory. (Try to re-clone the repo)
 - 003 - Instalation process falied
 
-install it using:
+install lscpu using:
 
 ```
 # Debian/Ubuntu
