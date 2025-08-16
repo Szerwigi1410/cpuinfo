@@ -114,8 +114,13 @@ else
 fi
 
 CUR_MHZ="$(lscpu | grep 'CPU MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
-
-CPU_SCL="$(lscpu | grep 'CPU(s) scaling MHz:' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
+    
+if [[ "$LSCPU_HERE" == true ]]; then
+    CPU_SCL="$(lscpu | grep 'CPU(s) scaling MHz:' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
+else
+    CPU_SCL="Unavailable on your OS"
+fi
+    
 # Fallback if min/max are empty
 if [[ -z "$MIN_MHZ" ]]; then
     MIN_MHZ="$CUR_MHZ"
