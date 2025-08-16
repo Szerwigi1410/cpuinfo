@@ -130,9 +130,27 @@ if [[ -z "$MAX_MHZ" ]]; then
 fi
 
 #cache
-L1="$(lscpu | grep 'L1' |awk -F: '{print $2}'| xargs |head -1)"
-L2="$(lscpu | grep 'L2' |awk -F: '{print $2}'| xargs)"
-L3="$(lscpu | grep 'L3' |awk -F: '{print $2}'| xargs)"
+
+#L1
+if [[ "$LSCPU_HERE" == true ]]; then
+    L1="$(lscpu | grep 'L1' |awk -F: '{print $2}'| xargs |head -1)"
+else
+    L1="$(( $(sysctl -n hw.l1icachesize) / 1024 )) KB"
+fi
+
+#L2
+if [[ "$LSCPU_HERE" == true ]]; then
+    L2="$(lscpu | grep 'L2' |awk -F: '{print $2}'| xargs)"
+else
+    L2="$(( $(sysctl -n hw.l2cachesize) / 1024 )) KB"
+fi
+
+#L3
+if [[ "$LSCPU_HERE" == true ]]; then
+    L3="$(lscpu | grep 'L3' |awk -F: '{print $2}'| xargs)"
+else
+    L3=" $(( $(sysctl -n hw.l3cachesize) / 1024 / 1024 )) MB"
+fi
 
 # ASCII art override
 ASCII_OVERRIDE=""
