@@ -3,6 +3,8 @@
 ![logo](photos/CPUinfo-logo.png)
 
 ---
+![GitHub top language](https://img.shields.io/github/languages/top/Szerwigi1410/cpuinfo)
+![GitHub License](https://img.shields.io/github/license/Szerwigi1410/cpuinfo)
 
 ## Overview
 `cpuinfo` is a Bash script that provides a colorful and detailed overview of your CPU using `lscpu`. It shows system information alongside fun ASCII art based on your CPU brand.  
