@@ -90,7 +90,8 @@ if [[ -z "$MAX_MHZ" ]]; then
 fi
 
 #cache
-L1="$(lscpu | grep 'L1' |awk -F: '{print $2}'| xargs |head -1)"
+L1d="$(lscpu | grep 'L1d' |awk -F: '{print $2}'| xargs |head -1)"
+L1i="$(lscpu | grep 'L1i' |awk -F: '{print $2}'| xargs |head -1)"
 L2="$(lscpu | grep 'L2' |awk -F: '{print $2}'| xargs)"
 L3="$(lscpu | grep 'L3' |awk -F: '{print $2}'| xargs)"
 
@@ -212,12 +213,13 @@ info07="${COLOR1}${BOLD}Threads per core:${RESET} ${COLOR}${THREAD_PER}${RESET}"
 info08="${COLOR1}${BOLD}Min MHz: ${RESET}${COLOR}${MIN_MHZ} Mhz${RESET}" #                                   "
 info09="${COLOR1}${BOLD}Max MHz: ${RESET}${COLOR}${MAX_MHZ} Mhz${RESET}" #                                  "
 info10="${COLOR1}${BOLD}CPU(s) scaling MHz: ${RESET}${COLOR}${CPU_SCL}${RESET}" #                           "
-info11="${COLOR1}${BOLD}L1:${RESET} ${COLOR}${L1}${RESET}"
-info12="${COLOR1}${BOLD}L2:${RESET} ${COLOR}${L2}${RESET}"
-info13="${COLOR1}${BOLD}L3:${RESET} ${COLOR}${L3}${RESET}"
+info11="${COLOR1}${BOLD}L1d:${RESET} ${COLOR}${L1d}${RESET}"
+info12="${COLOR1}${BOLD}L1i:${RESET} ${COLOR}${L1i}${RESET}"
+info13="${COLOR1}${BOLD}L2:${RESET} ${COLOR}${L2}${RESET}"
+info14="${COLOR1}${BOLD}L3:${RESET} ${COLOR}${L3}${RESET}"
 
 # Displayer! (dynamic, padded)
-info_vars=( "$info00" "$info01" "$info02" "$info03" "$info04" "$info05" "$info06" "$info07" "$info08" "$info09" "$info10" "$info11" "$info12" "$info13" )
+info_vars=( "$info00" "$info01" "$info02" "$info03" "$info04" "$info05" "$info06" "$info07" "$info08" "$info09" "$info10" "$info11" "$info12" "$info13" "$info14" )
 ascii_vars=( "$ascii00" "$ascii01" "$ascii02" "$ascii03" "$ascii04" "$ascii05" "$ascii06" "$ascii07" "$ascii08" "$ascii09" "$ascii10" "$ascii11" "$ascii12" "$ascii13" "$ascii14" "$ascii15" "$ascii16" "$ascii17" "$ascii18" "$ascii19" )
 
 # Find max visible length of info variables (ignoring color codes)
