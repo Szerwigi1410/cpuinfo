@@ -38,7 +38,7 @@ fi
 # Load values from the config
 source "$CONFIG_FILE"
 
-# Value of the color
+# Value of the colors
 COLOR=${!COLOR_NAME}
 COLOR1=${!SECOND_COLOR_NAME}
 
