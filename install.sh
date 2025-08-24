@@ -39,7 +39,7 @@ if [ ${#available_scripts[@]} -eq 1 ]; then
     source_file="${available_scripts[0]}"
     echo "Found '${source_file}'. This script will be installed."
 else
-    echo "Multiple brokefetch scripts found. Please choose one to install:"
+    echo "Multiple cpuinfo scripts found. Please choose one to install:"
     select choice in "${available_scripts[@]}"; do
         if [ -n "$choice" ]; then
             source_file="$choice"
