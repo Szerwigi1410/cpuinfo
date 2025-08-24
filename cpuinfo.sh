@@ -106,7 +106,6 @@ while getopts ":a:h" option; do
             echo "Usage:"
             echo "-a [cpu brand here] to overrite ascii art"
             echo "-h to display this help screen"
-            echo "-f to force output even without lscpu"
             echo -e "The config file is located at ${BOLD}~/.config/cpuinfo/${RESET}"
             exit;;
         a)  
