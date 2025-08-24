@@ -44,8 +44,10 @@ COLOR1=${!SECOND_COLOR_NAME}
 
 # Check if lscpu is installed
 if ! command -v lscpu &> /dev/null; then
+    LSCPU_HERE=false
     echo -e "${RED}Error code 001: lscpu is not installed on your system.${RESET}"
-    exit 1
+else
+    LSCPU_HERE=true
 fi
 
 ## Info gathering
@@ -98,12 +100,13 @@ L3="$(lscpu | grep 'L3' |awk -F: '{print $2}'| xargs)"
 # ASCII art override
 ASCII_OVERRIDE=""
 
-while getopts ":ha:" option; do
+while getopts ":a:h" option; do
     case $option in
         h) 
             echo "Usage:"
             echo "-a [cpu brand here] to overrite ascii art"
             echo "-h to display this help screen"
+            echo "-f to force output even without lscpu"
             echo -e "The config file is located at ${BOLD}~/.config/cpuinfo/${RESET}"
             exit;;
         a)  
