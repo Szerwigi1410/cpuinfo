@@ -61,7 +61,8 @@ else
 fi
 
 # CPU information
-CPU_NAME="$(lscpu | grep 'Model name' | awk -F: '{print $2}' | xargs)"
+#CPU_NAME="$(lscpu | grep 'Model name' | awk -F: '{print $2}' | xargs)"
+CPU_NAME="$(grep -m 1 'model name' /proc/cpuinfo | awk -F: '{print $2}' | xargs)"
 
 BRAND="$(lscpu | grep -Eio 'intel|amd|powerpc' | head -1)"
 if [ -z "$BRAND" ]; then
