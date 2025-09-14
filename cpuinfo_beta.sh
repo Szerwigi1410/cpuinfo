@@ -325,7 +325,7 @@ done
 for i in "${!info_vars[@]}"; do
     info="${info_vars[i]}"
     ascii="${ascii_vars[i]}"
-    width="${COLUMNS:-80}"
+    width="${COLUMNS:-105}"
 
     echo -e "$info\t$ascii" | awk -v w="$width" '
     {
