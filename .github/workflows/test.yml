@@ -2,38 +2,38 @@ name: Test cpuinfo.sh
 
 on:
   push:
-    branches: [ main, master, copilot/** ]
+    branches: [main, master, copilot/**]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
   workflow_dispatch:
 
 jobs:
   test-ubuntu:
     name: Test on Ubuntu
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y util-linux
-      
+
       - name: Verify lscpu is available
         run: |
           which lscpu
           lscpu --version
-      
+
       - name: Make script executable
         run: chmod +x cpuinfo.sh
-      
+
       - name: Run cpuinfo.sh
         run: |
           ./cpuinfo.sh > /tmp/cpuinfo_output.txt 2>&1
           cat /tmp/cpuinfo_output.txt
-      
+
       - name: Verify output contains expected information
         run: |
           # Check if output contains OS information
@@ -43,7 +43,7 @@ jobs:
             echo "✗ OS information missing"
             exit 1
           fi
-          
+
           # Check if output contains CPU brand
           if grep -q "Brand:" /tmp/cpuinfo_output.txt; then
             echo "✓ CPU Brand found"
@@ -51,7 +51,7 @@ jobs:
             echo "✗ CPU Brand missing"
             exit 1
           fi
-          
+
           # Check if output contains core information
           if grep -q "Cores:" /tmp/cpuinfo_output.txt; then
             echo "✓ Core information found"
@@ -59,7 +59,7 @@ jobs:
             echo "✗ Core information missing"
             exit 1
           fi
-          
+
           # Check if output contains thread information
           if grep -q "Threads:" /tmp/cpuinfo_output.txt; then
             echo "✓ Thread information found"
@@ -67,14 +67,14 @@ jobs:
             echo "✗ Thread information missing"
             exit 1
           fi
-      
+
       - name: Test with -a flag (override ASCII art)
         run: |
           ./cpuinfo.sh -a intel > /tmp/cpuinfo_intel.txt 2>&1
           cat /tmp/cpuinfo_intel.txt
           ./cpuinfo.sh -a amd > /tmp/cpuinfo_amd.txt 2>&1
           cat /tmp/cpuinfo_amd.txt
-      
+
       - name: Check config file creation
         run: |
           if [ -f "$HOME/.config/cpuinfo/config" ]; then
@@ -90,29 +90,29 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: archlinux:latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Install dependencies
         run: |
           pacman -Syu --noconfirm
           pacman -S --noconfirm util-linux grep gawk sed
-      
+
       - name: Verify lscpu is available
         run: |
           which lscpu
           lscpu --version
-      
+
       - name: Make script executable
         run: chmod +x cpuinfo.sh
-      
+
       - name: Run cpuinfo.sh
         run: |
           ./cpuinfo.sh > /tmp/cpuinfo_output.txt 2>&1
           cat /tmp/cpuinfo_output.txt
-      
+
       - name: Verify output contains expected information
         run: |
           # Check if output contains OS information
@@ -122,7 +122,7 @@ jobs:
             echo "✗ OS information missing"
             exit 1
           fi
-          
+
           # Check if output contains CPU brand
           if grep -q "Brand:" /tmp/cpuinfo_output.txt; then
             echo "✓ CPU Brand found"
@@ -130,7 +130,7 @@ jobs:
             echo "✗ CPU Brand missing"
             exit 1
           fi
-          
+
           # Check if output contains core information
           if grep -q "Cores:" /tmp/cpuinfo_output.txt; then
             echo "✓ Core information found"
@@ -138,7 +138,7 @@ jobs:
             echo "✗ Core information missing"
             exit 1
           fi
-          
+
           # Check if output contains thread information
           if grep -q "Threads:" /tmp/cpuinfo_output.txt; then
             echo "✓ Thread information found"
@@ -146,14 +146,14 @@ jobs:
             echo "✗ Thread information missing"
             exit 1
           fi
-      
+
       - name: Test with -a flag (override ASCII art)
         run: |
           ./cpuinfo.sh -a powerpc > /tmp/cpuinfo_powerpc.txt 2>&1
           cat /tmp/cpuinfo_powerpc.txt
           ./cpuinfo.sh -a arm > /tmp/cpuinfo_arm.txt 2>&1
           cat /tmp/cpuinfo_arm.txt
-      
+
       - name: Check config file creation
         run: |
           if [ -f "$HOME/.config/cpuinfo/config" ]; then
