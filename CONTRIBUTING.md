@@ -11,9 +11,9 @@ If you broke something, **you fix it**. That’s literally it.
 
 ## Quick Notes
 
-- Big ideas? Add them to `brokefetch_beta.sh`  
-- Found a bug? Fix it in **all three**:  
-  `brokefetch.sh`, `brokefetch_beta.sh`, `brokefetch_mod.sh`  
+- Big ideas? Add them to `cpuinfo_beta.sh`  
+- Found a bug? Fix it in **all two**:  
+  `cpuinfo.sh`, `cpuinfo_beta.sh`
 
 ---
 
