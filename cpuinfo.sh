@@ -42,10 +42,15 @@ source "$CONFIG_FILE"
 COLOR=${!COLOR_NAME}
 COLOR1=${!SECOND_COLOR_NAME}
 
-# Check if lscpu is installed
+# Detect OS
+OS_TYPE="$(uname -s)"
+
+# Check if lscpu is installed (Linux only)
 if ! command -v lscpu &> /dev/null; then
     LSCPU_HERE=false
-    echo -e "${RED}Error code 001: lscpu is not installed on your system.${RESET}"
+    if [[ "$OS_TYPE" == "Linux" ]]; then
+        echo -e "${RED}Error code 001: lscpu is not installed on your system.${RESET}"
+    fi
 else
     LSCPU_HERE=true
 fi
@@ -60,43 +65,149 @@ else
     OS_VERSION="$(uname -r)"
 fi
 
-# CPU information
-#CPU_NAME="$(lscpu | grep 'Model name' | awk -F: '{print $2}' | xargs)"
-CPU_NAME="$(grep -m 1 'model name' /proc/cpuinfo | awk -F: '{print $2}' | xargs)"
-
-BRAND="$(lscpu | grep -Eio 'intel|amd|powerpc' | head -1)"
-if [ -z "$BRAND" ]; then
-    BRAND="Unknown"
+# CPU information - OS specific
+if [[ "$OS_TYPE" == "Darwin" ]]; then
+    # macOS
+    CPU_NAME="$(sysctl -n machdep.cpu.brand_string 2>/dev/null)"
+    
+    # Detect CPU brand
+    BRAND="$(sysctl -n machdep.cpu.vendor 2>/dev/null)"
+    if [ -z "$BRAND" ]; then
+        # Check for Apple Silicon
+        if echo "$CPU_NAME" | grep -qi "apple"; then
+            BRAND="ARM"
+        elif echo "$CPU_NAME" | grep -qi "intel"; then
+            BRAND="Intel"
+        elif echo "$CPU_NAME" | grep -qi "amd"; then
+            BRAND="AMD"
+        else
+            BRAND="idk lol"
+        fi
+    else
+        # Normalize vendor name
+        if echo "$BRAND" | grep -qi "intel"; then
+            BRAND="Intel"
+        elif echo "$BRAND" | grep -qi "amd"; then
+            BRAND="AMD"
+        elif echo "$BRAND" | grep -qi "apple"; then
+            BRAND="ARM"
+        fi
+    fi
+    
+    CORE_NUM="$(sysctl -n hw.physicalcpu 2>/dev/null)"
+    THREADS="$(sysctl -n hw.logicalcpu 2>/dev/null)"
+    if [[ -n "$CORE_NUM" && -n "$THREADS" && "$CORE_NUM" -gt 0 ]]; then
+        THREAD_PER="$((THREADS / CORE_NUM))"
+    else
+        THREAD_PER="Unknown"
+    fi
+    
+    # macOS frequencies (in Hz, convert to MHz)
+    CUR_MHZ="$(sysctl -n hw.cpufrequency 2>/dev/null | awk '{if($1>0) print int($1/1000000)}')"
+    MIN_MHZ="$(sysctl -n hw.cpufrequency_min 2>/dev/null | awk '{if($1>0) print int($1/1000000)}')"
+    MAX_MHZ="$(sysctl -n hw.cpufrequency_max 2>/dev/null | awk '{if($1>0) print int($1/1000000)}')"
+    
+    # Check if this is Apple Silicon
+    IS_APPLE_SILICON=false
+    if echo "$CPU_NAME" | grep -qiE "Apple M[0-9]|Apple M[0-9] Pro|Apple M[0-9] Max|Apple M[0-9] Ultra"; then
+        IS_APPLE_SILICON=true
+    fi
+    
+    # Fallback for Apple Silicon and other Macs where hw.cpufrequency* is not available
+    if [[ -z "$CUR_MHZ" || "$CUR_MHZ" == "0" ]]; then
+        if $IS_APPLE_SILICON; then
+            # Apple Silicon - try to parse from system_profiler or use known values
+            CHIP_INFO="$(system_profiler SPHardwareDataType 2>/dev/null | grep "Chip:" | awk -F: '{print $2}' | xargs)"
+            if echo "$CHIP_INFO" | grep -qi "M1"; then
+                MIN_MHZ="600"      # Efficiency cores min
+                MAX_MHZ="3200"     # Performance cores max
+                CUR_MHZ="Variable"
+            elif echo "$CHIP_INFO" | grep -qi "M2"; then
+                MIN_MHZ="600"
+                MAX_MHZ="3500"
+                CUR_MHZ="Variable"
+            elif echo "$CHIP_INFO" | grep -qi "M3"; then
+                MIN_MHZ="600"
+                MAX_MHZ="4000"
+                CUR_MHZ="Variable"
+            else
+                MIN_MHZ="Dynamic"
+                MAX_MHZ="Dynamic"
+                CUR_MHZ="Variable"
+            fi
+        else
+            # Intel Mac - try alternative methods
+            CUR_MHZ="$(sysctl -n hw.tbfrequency 2>/dev/null | awk '{if($1>0) print int($1/1000000)}')"
+            if [[ -z "$CUR_MHZ" ]]; then
+                CUR_MHZ="Unknown"
+            fi
+            MIN_MHZ="${MIN_MHZ:-Unknown}"
+            MAX_MHZ="${MAX_MHZ:-$CUR_MHZ}"
+        fi
+    fi
+    
+    CPU_SCL=""
+    
+    # Cache info for macOS
+    L1d="$(sysctl -n hw.l1dcachesize 2>/dev/null | awk '{printf "%.0f KiB", $1/1024}')"
+    L1i="$(sysctl -n hw.l1icachesize 2>/dev/null | awk '{printf "%.0f KiB", $1/1024}')"
+    L2="$(sysctl -n hw.l2cachesize 2>/dev/null | awk '{printf "%.0f KiB", $1/1024}')"
+    L3="$(sysctl -n hw.l3cachesize 2>/dev/null | awk '{printf "%.0f KiB", $1/1024}')"
+    
+    # Clean up "0 KiB" entries
+    [[ "$L1d" == "0 KiB" ]] && L1d=""
+    [[ "$L1i" == "0 KiB" ]] && L1i=""
+    [[ "$L2" == "0 KiB" ]] && L2=""
+    [[ "$L3" == "0 KiB" ]] && L3=""
+    
+else
+    # Linux
+    CPU_NAME="$(grep -m 1 'model name' /proc/cpuinfo | awk -F: '{print $2}' | xargs)"
+    
+    BRAND="$(lscpu | grep -Eio 'intel|amd|powerpc' | head -1)"
+    if [ -z "$BRAND" ]; then
+        BRAND="Unknown"
+    fi
+    
+    CORE_NUM="$(lscpu | grep 'Core(s) per socket' | awk -F: '{print $2}' | xargs)"
+    THREADS="$(nproc)"
+    THREAD_PER="$(lscpu | grep 'Thread(s) per core' | awk -F: '{print $2}' | xargs)"
+    
+    # MHz
+    MIN_MHZ="$(lscpu | grep 'CPU min MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
+    MAX_MHZ="$(lscpu | grep 'CPU max MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
+    CUR_MHZ="$(lscpu | grep 'CPU MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
+    
+    CPU_SCL="$(lscpu | grep 'CPU(s) scaling MHz:' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
+    
+    # Fallback to /sys/devices/system/cpu if lscpu doesn't provide frequency info
+    if [[ -z "$MIN_MHZ" && -f "/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq" ]]; then
+        MIN_MHZ="$(awk '{print int($1/1000)}' /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq 2>/dev/null)"
+    fi
+    if [[ -z "$MAX_MHZ" && -f "/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq" ]]; then
+        MAX_MHZ="$(awk '{print int($1/1000)}' /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq 2>/dev/null)"
+    fi
+    if [[ -z "$CUR_MHZ" && -f "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq" ]]; then
+        CUR_MHZ="$(awk '{print int($1/1000)}' /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq 2>/dev/null)"
+    fi
+    
+    # Final fallback if min/max are still empty
+    if [[ -z "$MIN_MHZ" ]]; then
+        MIN_MHZ="${CUR_MHZ:-Unknown}"
+    fi
+    if [[ -z "$MAX_MHZ" ]]; then
+        MAX_MHZ="${CUR_MHZ:-Unknown}"
+    fi
+    if [[ -z "$CUR_MHZ" ]]; then
+        CUR_MHZ="Unknown"
+    fi
+    
+    # Cache
+    L1d="$(lscpu | grep 'L1d' |awk -F: '{print $2}'| xargs |head -1)"
+    L1i="$(lscpu | grep 'L1i' |awk -F: '{print $2}'| xargs |head -1)"
+    L2="$(lscpu | grep 'L2' |awk -F: '{print $2}'| xargs)"
+    L3="$(lscpu | grep 'L3' |awk -F: '{print $2}'| xargs)"
 fi
-
-# Number of cores
-CORE_NUM="$(lscpu | grep 'Core(s) per socket' | awk -F: '{print $2}' | xargs)"
-
-# Threads
-
-THREADS="$(nproc)"
-
-THREAD_PER="$(lscpu | grep 'Thread(s) per core' | awk -F: '{print $2}' | xargs)"
-
-# MHz
-MIN_MHZ="$(lscpu | grep 'CPU min MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
-MAX_MHZ="$(lscpu | grep 'CPU max MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
-CUR_MHZ="$(lscpu | grep 'CPU MHz' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
-
-CPU_SCL="$(lscpu | grep 'CPU(s) scaling MHz:' | awk -F: '{print $2}' | xargs | sed 's/\.[0]*$//')"
-# Fallback if min/max are empty
-if [[ -z "$MIN_MHZ" ]]; then
-    MIN_MHZ="$CUR_MHZ"
-fi
-if [[ -z "$MAX_MHZ" ]]; then
-    MAX_MHZ="$CUR_MHZ"
-fi
-
-#cache
-L1d="$(lscpu | grep 'L1d' |awk -F: '{print $2}'| xargs |head -1)"
-L1i="$(lscpu | grep 'L1i' |awk -F: '{print $2}'| xargs |head -1)"
-L2="$(lscpu | grep 'L2' |awk -F: '{print $2}'| xargs)"
-L3="$(lscpu | grep 'L3' |awk -F: '{print $2}'| xargs)"
 
 # ASCII art override
 ASCII_OVERRIDE=""
@@ -215,7 +326,12 @@ info06="${COLOR1}${BOLD}Threads:${RESET} ${COLOR}${THREADS}${RESET}" #          
 info07="${COLOR1}${BOLD}Threads per core:${RESET} ${COLOR}${THREAD_PER}${RESET}" #                                "
 info08="${COLOR1}${BOLD}Min MHz: ${RESET}${COLOR}${MIN_MHZ} Mhz${RESET}" #                                   "
 info09="${COLOR1}${BOLD}Max MHz: ${RESET}${COLOR}${MAX_MHZ} Mhz${RESET}" #                                  "
-info10="${COLOR1}${BOLD}CPU(s) scaling MHz: ${RESET}${COLOR}${CPU_SCL}${RESET}" #                           "
+# Only show CPU scaling on Linux
+if [[ -n "$CPU_SCL" ]]; then
+    info10="${COLOR1}${BOLD}CPU(s) scaling MHz: ${RESET}${COLOR}${CPU_SCL}${RESET}" #                           "
+else
+    info10=""
+fi
 info11="${COLOR1}${BOLD}L1d:${RESET} ${COLOR}${L1d}${RESET}"
 info12="${COLOR1}${BOLD}L1i:${RESET} ${COLOR}${L1i}${RESET}"
 info13="${COLOR1}${BOLD}L2:${RESET} ${COLOR}${L2}${RESET}"
@@ -242,31 +358,7 @@ for i in "${!info_vars[@]}"; do
 done
 
 # Print info + ASCII
-#for i in "${!info_vars[@]}"; do
-#    echo -e "${info_vars[i]}${ascii_vars[i]}"
-#done
-
-# Loop 00-20 safely
 for i in "${!info_vars[@]}"; do
-    info="${info_vars[i]}"
-    ascii="${ascii_vars[i]}"
-    width="${COLUMNS:-105}"
-
-    echo -e "$info\t$ascii" | awk -v w="$width" '
-    {
-      out=""; vis=0
-      while (length($0) > 0 && vis < w) {
-        if (match($0,/^\x1b\[[0-9;]*[A-Za-z]/)) {
-          out = out substr($0,1,RLENGTH)
-          $0 = substr($0,RLENGTH+1)
-        } else {
-          ch = substr($0,1,1)
-          out = out ch
-          $0 = substr($0,2)
-          vis++
-        }
-      }
-      print out
-    }'
+    echo -e "${info_vars[i]}\t${ascii_vars[i]}"
 done
 
