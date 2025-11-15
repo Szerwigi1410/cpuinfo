@@ -61,6 +61,6 @@ Also, the [owner](https://github.com/Szerwigi1410) forgot to tell you how to con
 
 ## License Stuff 📝
 
-This project uses the [MIT License]([text](https://github.com/Szerwigi1410/cpuinfo/blob/main/LICENSE)) — aka: **do whatever you want**. Seriously. All the things. No restrictions (btw if this code teaches your cat bash, it's not our problem)
+This project uses the [MIT License](https://github.com/Szerwigi1410/cpuinfo/blob/main/LICENSE) — aka: **do whatever you want**. Seriously. All the things. No restrictions (btw if this code teaches your cat bash, it's not our problem)
 
 Have fun, break stuff responsibly, and welcome to the chaos. 🚀
