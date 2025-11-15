@@ -11,6 +11,8 @@ jobs:
   test-ubuntu:
     name: Test on Ubuntu
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
@@ -29,6 +31,8 @@ jobs:
   test-archlinux:
     name: Test on ArchLinux
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     container:
       image: archlinux:latest
 
