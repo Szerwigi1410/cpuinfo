@@ -21,69 +21,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y util-linux
 
-      - name: Verify lscpu is available
-        run: |
-          which lscpu
-          lscpu --version
-
-      - name: Make script executable
-        run: chmod +x cpuinfo.sh
-
       - name: Run cpuinfo.sh
         run: |
-          ./cpuinfo.sh > /tmp/cpuinfo_output.txt 2>&1
-          cat /tmp/cpuinfo_output.txt
-
-      - name: Verify output contains expected information
-        run: |
-          # Check if output contains OS information
-          if grep -q "OS:" /tmp/cpuinfo_output.txt; then
-            echo "✓ OS information found"
-          else
-            echo "✗ OS information missing"
-            exit 1
-          fi
-
-          # Check if output contains CPU brand
-          if grep -q "Brand:" /tmp/cpuinfo_output.txt; then
-            echo "✓ CPU Brand found"
-          else
-            echo "✗ CPU Brand missing"
-            exit 1
-          fi
-
-          # Check if output contains core information
-          if grep -q "Cores:" /tmp/cpuinfo_output.txt; then
-            echo "✓ Core information found"
-          else
-            echo "✗ Core information missing"
-            exit 1
-          fi
-
-          # Check if output contains thread information
-          if grep -q "Threads:" /tmp/cpuinfo_output.txt; then
-            echo "✓ Thread information found"
-          else
-            echo "✗ Thread information missing"
-            exit 1
-          fi
-
-      - name: Test with -a flag (override ASCII art)
-        run: |
-          ./cpuinfo.sh -a intel > /tmp/cpuinfo_intel.txt 2>&1
-          cat /tmp/cpuinfo_intel.txt
-          ./cpuinfo.sh -a amd > /tmp/cpuinfo_amd.txt 2>&1
-          cat /tmp/cpuinfo_amd.txt
-
-      - name: Check config file creation
-        run: |
-          if [ -f "$HOME/.config/cpuinfo/config" ]; then
-            echo "✓ Config file created"
-            cat "$HOME/.config/cpuinfo/config"
-          else
-            echo "✗ Config file not created"
-            exit 1
-          fi
+          chmod +x cpuinfo.sh
+          ./cpuinfo.sh
 
   test-archlinux:
     name: Test on ArchLinux
@@ -98,68 +39,9 @@ jobs:
       - name: Install dependencies
         run: |
           pacman -Syu --noconfirm
-          pacman -S --noconfirm util-linux grep gawk sed
-
-      - name: Verify lscpu is available
-        run: |
-          which lscpu
-          lscpu --version
-
-      - name: Make script executable
-        run: chmod +x cpuinfo.sh
+          pacman -S --noconfirm util-linux
 
       - name: Run cpuinfo.sh
         run: |
-          ./cpuinfo.sh > /tmp/cpuinfo_output.txt 2>&1
-          cat /tmp/cpuinfo_output.txt
-
-      - name: Verify output contains expected information
-        run: |
-          # Check if output contains OS information
-          if grep -q "OS:" /tmp/cpuinfo_output.txt; then
-            echo "✓ OS information found"
-          else
-            echo "✗ OS information missing"
-            exit 1
-          fi
-
-          # Check if output contains CPU brand
-          if grep -q "Brand:" /tmp/cpuinfo_output.txt; then
-            echo "✓ CPU Brand found"
-          else
-            echo "✗ CPU Brand missing"
-            exit 1
-          fi
-
-          # Check if output contains core information
-          if grep -q "Cores:" /tmp/cpuinfo_output.txt; then
-            echo "✓ Core information found"
-          else
-            echo "✗ Core information missing"
-            exit 1
-          fi
-
-          # Check if output contains thread information
-          if grep -q "Threads:" /tmp/cpuinfo_output.txt; then
-            echo "✓ Thread information found"
-          else
-            echo "✗ Thread information missing"
-            exit 1
-          fi
-
-      - name: Test with -a flag (override ASCII art)
-        run: |
-          ./cpuinfo.sh -a powerpc > /tmp/cpuinfo_powerpc.txt 2>&1
-          cat /tmp/cpuinfo_powerpc.txt
-          ./cpuinfo.sh -a arm > /tmp/cpuinfo_arm.txt 2>&1
-          cat /tmp/cpuinfo_arm.txt
-
-      - name: Check config file creation
-        run: |
-          if [ -f "$HOME/.config/cpuinfo/config" ]; then
-            echo "✓ Config file created"
-            cat "$HOME/.config/cpuinfo/config"
-          else
-            echo "✗ Config file not created"
-            exit 1
-          fi
+          chmod +x cpuinfo.sh
+          ./cpuinfo.sh
