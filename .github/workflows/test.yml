@@ -1,0 +1,51 @@
+name: Test cpuinfo.sh
+
+on:
+  push:
+    branches: [main, master, copilot/**]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  test-ubuntu:
+    name: Test on Ubuntu
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y util-linux
+
+      - name: Run cpuinfo.sh
+        run: |
+          chmod +x cpuinfo.sh
+          ./cpuinfo.sh
+
+  test-archlinux:
+    name: Test on ArchLinux
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    container:
+      image: archlinux:latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm util-linux
+
+      - name: Run cpuinfo.sh
+        run: |
+          chmod +x cpuinfo.sh
+          ./cpuinfo.sh
